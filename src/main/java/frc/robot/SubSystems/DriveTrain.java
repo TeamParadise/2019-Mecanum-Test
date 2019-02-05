@@ -2,7 +2,7 @@ package frc.robot.SubSystems;
 
 import frc.robot.Robot;
 import frc.robot.commands.DriveWithJoystick;
-
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
@@ -61,7 +61,8 @@ public class DriveTrain extends Subsystem
 	{
     isRunning = Math.abs(x) >= 0.2 || Math.abs(y) >= 0.2 || Math.abs(twist) >= 0.3 ? true : false;
     
-		robotDrive.driveCartesian(x, y, twist, gyroAngle);
+	DriverStation.reportWarning(x+","+y+","+twist, false);
+	robotDrive.driveCartesian(x, -y, twist*.5, gyroAngle);
 		// SmartDashboard.putNumber("Heading", Robot.navXSource.getHeading());
 	}
 	
@@ -71,6 +72,5 @@ public class DriveTrain extends Subsystem
 	}	
 	public void report()
 	{
-  
   }
 }

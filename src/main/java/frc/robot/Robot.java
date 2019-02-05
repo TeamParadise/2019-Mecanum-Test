@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.PWMVictorSPX;
 //import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -51,31 +52,10 @@ public class Robot extends TimedRobot {
 
  @Override
  public void teleopPeriodic() {
-  //  // Use the joystick X axis for lateral movement, Y axis for forward
-  //  // movement, and Z axis for rotation.
-  
-  double x = m_stick.getX();
-    if ((x < 0.2) && (x > -0.2)) x = 0;
-    x *= 0.5;
-    double y = m_stick.getY();
-    if ((y < 0.2) && (y > -0.2)) y = 0;
-    //y *= 0.5;
-    double z = m_stick.getZ();
-    if ((z < 0.3) && (z > -0.3)) z = 0;
-    z *= 0.5;
-  //  //System.out.println(z);
-  
-    
-   //SmartDashboard.updateValues();
-   //if (m_stick.getRawButtonPressed(7))
-  //{
-    //System.out.print(rightSonar.getInches() + " , " + leftSonar.getInches() + " , " + specialSonar.getInches());
-    //SmartDashboard.putString("Sonar",Double.toString(leftSonar.getInches()) + " , " + Double.toString(rightSonar.getInches()));
-    //SmartDashboard.putString("Sonar",Double.toString(leftSonar.getInches()) + " , " + Double.toString(rightSonar.getInches()));
     SmartDashboard.putNumber("Left Sonar", (int)leftSonar.getInches());
     SmartDashboard.putNumber("Right Sonar", (int)rightSonar.getInches());
-    //driveTrain.driveCartesian(x, y, twist, gyroAngle);
-    driveTrain.driveCartesian(x, y, z, 0.0);
+
+    Scheduler.getInstance().run(); //causes all default commands to run
   }
 }
 
