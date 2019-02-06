@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
  public static Joystick m_stick = new Joystick(kJoystickChannel);;
 
  public static Sonar rightSonar = new Sonar(0,1);
- public static Sonar leftSonar = new Sonar(4,3);
+ public static Sonar leftSonar = new Sonar(2,3);
  
  @Override
  public void robotInit() {
