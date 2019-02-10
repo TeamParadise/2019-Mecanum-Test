@@ -1,29 +1,20 @@
 package frc.robot.SubSystems;
 
-import frc.robot.Robot;
-import frc.robot.commands.DriveWithJoystick;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.command.Command;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import frc.robot.RobotMap;
+import frc.robot.commands.DriveWithJoystick;
 
 public class DriveTrain extends Subsystem
 {
-  public static final int kFrontLeftChannel = 0;//0
-  public static final int kRearLeftChannel = 1;//1
-  public static final int kFrontRightChannel = 3;//3
-  public static final int kRearRightChannel = 2;//2
-
-  WPI_TalonSRX frontLeft = new WPI_TalonSRX(kFrontLeftChannel);
-  WPI_TalonSRX rearLeft = new WPI_TalonSRX(kRearLeftChannel);
-  WPI_TalonSRX frontRight = new WPI_TalonSRX(kFrontRightChannel);
-  WPI_TalonSRX rearRight = new WPI_TalonSRX(kRearRightChannel);
  
+    WPI_TalonSRX frontLeft = new WPI_TalonSRX(RobotMap.kFrontLeftChannel);
+	WPI_TalonSRX rearLeft = new WPI_TalonSRX(RobotMap.kRearLeftChannel);
+	WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.kFrontRightChannel);
+	WPI_TalonSRX rearRight = new WPI_TalonSRX(RobotMap.kRearRightChannel);
+
 	private int rearLeftVal = 0;
 	private int rearRightVal = 1;
 
@@ -61,7 +52,7 @@ public class DriveTrain extends Subsystem
 	{
     isRunning = Math.abs(x) >= 0.2 || Math.abs(y) >= 0.2 || Math.abs(twist) >= 0.3 ? true : false;
     
-	DriverStation.reportWarning(x+","+y+","+twist, false);
+	//	DriverStation.reportWarning(x+","+y+","+twist, false);
 	robotDrive.driveCartesian(x, -y, twist*.5, gyroAngle);
 		// SmartDashboard.putNumber("Heading", Robot.navXSource.getHeading());
 	}
