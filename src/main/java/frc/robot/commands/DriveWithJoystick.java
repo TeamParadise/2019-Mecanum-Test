@@ -26,9 +26,9 @@ public class DriveWithJoystick extends Command
 	@Override
 	protected void execute()
 	{
-			Robot.driveTrain.driveCartesian(Robot.m_stick.getX(), Robot.m_stick.getY(), Robot.m_stick.getZ(), 0);
+		Robot.driveTrain.driveCartesian(Robot.m_stick.getX(), Robot.m_stick.getY(), Robot.m_stick.getZ(), 0);
 		
-
+		
 		Robot.driveTrain.report();
 	}
 

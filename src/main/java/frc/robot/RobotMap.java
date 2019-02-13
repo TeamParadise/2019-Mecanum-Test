@@ -16,7 +16,11 @@ public class RobotMap {
     public static final int kGrabExtend = 7;
     public static final int kGrabRetract = 8;
     public static final int kGrabIdle = 9;
-
+ 
+    public static final int kConfirmManualLift = 6;
+    public static final int kResetLiftPosition = 12;
+    //lift can manually be moved by pressing 6 and moving the throttle
+ 
     //DIO
     public static final int kRightPingChannel = 0;
     public static final int kRightEchoChannel = 1;

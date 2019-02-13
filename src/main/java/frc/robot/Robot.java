@@ -7,10 +7,6 @@
 
 package frc.robot;
 
-import java.lang.reflect.Field;
-import java.util.Hashtable;
-import java.util.List;
-
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.PWMVictorSPX;
@@ -32,11 +28,13 @@ public class Robot extends TimedRobot {
 
  
  public static final DriveTrain driveTrain = new DriveTrain();
+ public static final LiftSystem lift = new LiftSystem();
  public static MecanumDrive m_robotDrive;
  public static Joystick m_stick = new Joystick(RobotMap.kJoystickChannel);;
 
- public static Ultrasonic rightSonar = new Ultrasonic(RobotMap.kRightPingChannel,RobotMap.kRightEchoChannel,Ultrasonic.Unit.kInches);
+ 
  public static Ultrasonic leftSonar = new Ultrasonic(RobotMap.kLeftPingChannel,RobotMap.kLeftEchoChannel,Ultrasonic.Unit.kInches);
+ public static Ultrasonic rightSonar = new Ultrasonic(RobotMap.kRightPingChannel,RobotMap.kRightEchoChannel,Ultrasonic.Unit.kInches);
  
 
  public static Pneumatic discGrabber = new Pneumatic(0,1);
@@ -82,19 +80,18 @@ public class Robot extends TimedRobot {
 
   //System.out.printf("left: %f, right: %f\n", leftSonar.getRangeInches(), rightSonar.getRangeInches());
 
-  SmartDashboard.putNumber("Left Sonar", (int)leftSonar.getRangeInches());
+    SmartDashboard.putNumber("Left Sonar", (int)leftSonar.getRangeInches());
     SmartDashboard.putNumber("Right Sonar", (int)rightSonar.getRangeInches());
+    lift.report();
+
+    if (m_stick.getRawButton(RobotMap.kResetLiftPosition)) lift.resetLiftPosition(); 
+
 
     if (m_stick.getRawButtonPressed(RobotMap.kGrabExtend)) discGrabber.extend();
     if (m_stick.getRawButtonPressed(RobotMap.kGrabRetract)) discGrabber.retract();
     if (m_stick.getRawButtonPressed(RobotMap.kGrabIdle)) discGrabber.idle();
 
-    double power = 0;
-    power = m_stick.getThrottle();
-    if (Math.abs(power) < 0.2 ) power = 0;
-    //System.out.println(power);
-    LiftSystem.Liftmotor.set(power);
-   // System.out.println(LiftSystem.Liftmotor.getEncPosition());
+    
     Scheduler.getInstance().run(); //causes all default commands to run
   }
 }
