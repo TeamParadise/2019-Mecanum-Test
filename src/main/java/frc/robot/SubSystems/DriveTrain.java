@@ -1,6 +1,7 @@
 package frc.robot.SubSystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -10,10 +11,15 @@ import frc.robot.commands.DriveWithJoystick;
 public class DriveTrain extends Subsystem
 {
  
-    WPI_TalonSRX frontLeft = new WPI_TalonSRX(RobotMap.kFrontLeftChannel);
-	WPI_TalonSRX rearLeft = new WPI_TalonSRX(RobotMap.kRearLeftChannel);
-	WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.kFrontRightChannel);
-	WPI_TalonSRX rearRight = new WPI_TalonSRX(RobotMap.kRearRightChannel);
+    // WPI_TalonSRX frontLeft = new WPI_TalonSRX(RobotMap.kFrontLeftChannel);
+	// WPI_TalonSRX rearLeft = new WPI_TalonSRX(RobotMap.kRearLeftChannel);
+	// WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.kFrontRightChannel);
+	// WPI_TalonSRX rearRight = new WPI_TalonSRX(RobotMap.kRearRightChannel);
+ 
+	WPI_VictorSPX frontLeft = new WPI_VictorSPX(RobotMap.kFrontLeftChannel);
+	WPI_VictorSPX rearLeft = new WPI_VictorSPX(RobotMap.kRearLeftChannel);
+	WPI_VictorSPX frontRight = new WPI_VictorSPX(RobotMap.kFrontRightChannel);
+	WPI_VictorSPX rearRight = new WPI_VictorSPX(RobotMap.kRearRightChannel);
 
 	private int rearLeftVal = 0;
 	private int rearRightVal = 1;

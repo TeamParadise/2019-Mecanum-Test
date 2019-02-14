@@ -28,10 +28,12 @@ public class RobotMap {
     public static final int kLeftEchoChannel = 3;
     
     //MotorControllers
-    
+    //victors
     public static final int kFrontLeftChannel = 0;//0
     public static final int kRearLeftChannel = 1;//1
     public static final int kFrontRightChannel = 3;//3
     public static final int kRearRightChannel = 2;//2
-    public static final int kLiftChannel = 4;
+
+    //talons
+    public static final int kLiftChannel = 0;
 }

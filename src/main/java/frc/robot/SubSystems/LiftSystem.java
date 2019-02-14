@@ -11,7 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.LiftWithJoyStick;
@@ -19,7 +19,7 @@ import frc.robot.commands.LiftWithJoyStick;
 /**
  * Add your docs here.
  */
-public class LiftSystem extends PIDSubsystem {
+public class LiftSystem extends Subsystem {
   
   // Which PID slot to pull gains from. Choose from 0,1,2 or 3.
 	public static final int kSlotIdx = 0;
@@ -51,15 +51,10 @@ public class LiftSystem extends PIDSubsystem {
 	public static WPI_TalonSRX Liftmotor  = new WPI_TalonSRX(RobotMap.kLiftChannel);
 
   public LiftSystem() {
-    // Intert a subsystem name and PID values here
-    super("LiftSystem", 1, 2, 3);
-    // Use these to get going:
-    // setSetpoint() - Sets where the PID controller should move the system
-    // to
-    // enable() - Enables the PID controller.
-
     /* Config the sensor used for Primary PID and sensor direction */
-    Liftmotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, kPIDLoopIdx, kTimeoutMs);
+		Liftmotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, kPIDLoopIdx, kTimeoutMs);
+		// Liftmotor.reverseSensor(true);
+		// Liftmotor.reverseOutput(true);
 
     /*causes encoder to zero when reverse limit switch is hit*/
     Liftmotor.configClearPositionOnLimitR(true, kTimeoutMs);
@@ -80,8 +75,8 @@ public class LiftSystem extends PIDSubsystem {
     /* Config the peak and nominal outputs, 12V means full */
 		Liftmotor.configNominalOutputForward(0, kTimeoutMs);
 		Liftmotor.configNominalOutputReverse(0, kTimeoutMs);
-		Liftmotor.configPeakOutputForward(1, kTimeoutMs);
-    Liftmotor.configPeakOutputReverse(-1, kTimeoutMs);
+		Liftmotor.configPeakOutputForward(kPeakOutput, kTimeoutMs);
+    Liftmotor.configPeakOutputReverse(-kPeakOutput, kTimeoutMs);
     
     /**
 		 * Config the allowable closed-loop error, Closed-Loop output will be
@@ -115,6 +110,7 @@ public class LiftSystem extends PIDSubsystem {
   //uses the PID internal to the Talon as configured in initialization to move the lift to the desired height
   public void moveLiftToPosition(int desiredheight)
   {
+		//ref: https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/tree/master/Java/PositionClosedLoop/src/main/java/frc/robot
  		/* Prepare line to print */
 		_sb.append("\tout:");
 		/* Cast Talon's current output percentageto int to remove decimal places */
@@ -124,7 +120,8 @@ public class LiftSystem extends PIDSubsystem {
 		_sb.append("\tpos:");
 		_sb.append(Liftmotor.getSelectedSensorPosition(0));
     _sb.append("u"); 	// Native units
-    
+		
+		//Liftmotor.setSelectedSensorPosition(desiredheight, kPIDLoopIdx, kTimeoutMs);
     //a cimcoder has 20 ticks per revolution, but in this case we know how many ticks we desire
     Liftmotor.set(ControlMode.Position, desiredheight);
 
@@ -151,6 +148,7 @@ public class LiftSystem extends PIDSubsystem {
 		/* Reset built string for next loop */
 		_sb.setLength(0);
 		}
+	
   } 
 
   public double liftPosition()
@@ -166,20 +164,6 @@ public class LiftSystem extends PIDSubsystem {
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new LiftWithJoyStick());
-  }
-
-  @Override
-  protected double returnPIDInput() {
-    // Return your input value for the PID loop
-    // e.g. a sensor, like a potentiometer:
-    // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    return 0.0;
-  }
-
-  @Override
-  protected void usePIDOutput(double output) {
-    // Use output to drive your system, like a motor
-    // e.g. yourMotor.set(output);
   }
 
   public void report(){

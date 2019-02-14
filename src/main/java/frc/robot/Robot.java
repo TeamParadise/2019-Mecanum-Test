@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.SubSystems.DriveTrain;
 import frc.robot.SubSystems.LiftSystem;
 import frc.robot.SubSystems.Pneumatic;
+import frc.robot.commands.LiftToHeight;
 
 /**
  * This is a demo program showing how to use Mecanum control with the RobotDrive
@@ -82,6 +83,12 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("Left Sonar", (int)leftSonar.getRangeInches());
     SmartDashboard.putNumber("Right Sonar", (int)rightSonar.getRangeInches());
+    // SmartDashboard.putData(new LiftToHeight(0));
+    SmartDashboard.putData(new LiftToHeight(1000));
+    // SmartDashboard.putData(new LiftToHeight(2000));
+
+    //if (m_stick.getRawButtonPressed(11)) LiftToHeight(1000);
+
     lift.report();
 
     if (m_stick.getRawButton(RobotMap.kResetLiftPosition)) lift.resetLiftPosition(); 
