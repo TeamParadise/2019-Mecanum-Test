@@ -9,8 +9,9 @@ package frc.robot.SubSystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
@@ -35,7 +36,7 @@ public class LiftSystem extends Subsystem {
 
 	public static boolean kMotorInvert = false;
 
-  public final double kP = 0.15;
+  public final double kP = 0.15; //0.15;
 	public final double kI = 0.0;
 	public final double kD = 1.0;
 	public final double kF = 0.0;
@@ -45,15 +46,14 @@ public class LiftSystem extends Subsystem {
   /** Used to create string thoughout loop */
   boolean _printresults = true;
 	StringBuilder _sb = new StringBuilder();
-	int _loops = 0;
+	int _loops = 100;
 
-
-	public static WPI_TalonSRX Liftmotor  = new WPI_TalonSRX(RobotMap.kLiftChannel);
+	public static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 
   public LiftSystem() {
     /* Config the sensor used for Primary PID and sensor direction */
 		Liftmotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, kPIDLoopIdx, kTimeoutMs);
-		// Liftmotor.reverseSensor(true);
+		//Liftmotor.reverseSensor(true);
 		// Liftmotor.reverseOutput(true);
 
     /*causes encoder to zero when reverse limit switch is hit*/
@@ -117,13 +117,16 @@ public class LiftSystem extends Subsystem {
 		_sb.append((int) (Liftmotor.getMotorOutputPercent() * 100));
 		_sb.append("%");	// Percent
 
+		_sb.append("\tVel:");
+		_sb.append(Liftmotor.getSelectedSensorVelocity());
+
 		_sb.append("\tpos:");
 		_sb.append(Liftmotor.getSelectedSensorPosition(0));
     _sb.append("u"); 	// Native units
 		
-		//Liftmotor.setSelectedSensorPosition(desiredheight, kPIDLoopIdx, kTimeoutMs);
-    //a cimcoder has 20 ticks per revolution, but in this case we know how many ticks we desire
-    Liftmotor.set(ControlMode.Position, desiredheight);
+	//	if (Liftmotor.getSelectedSensorVelocity()==0)
+    	//a cimcoder has 20 ticks per revolution, but in this case we know how many ticks we desire
+    	Liftmotor.set(ControlMode.Position, desiredheight);
 
     /* If Talon is in position closed-loop, print some more info */
 		if (Liftmotor.getControlMode() == ControlMode.Position) {
@@ -166,11 +169,11 @@ public class LiftSystem extends Subsystem {
     setDefaultCommand(new LiftWithJoyStick());
   }
 
-  public void report(){
+	public void report(boolean debugTrace)
+	{
+		if (debugTrace) DriverStation.reportWarning("Report Lift", false);
     SmartDashboard.putNumber("Velocity:", Liftmotor.getSelectedSensorVelocity());
     SmartDashboard.putNumber("Position:", liftPosition());
     SmartDashboard.putNumber("Out %", Liftmotor.getMotorOutputPercent());
-    
-
   }
 }

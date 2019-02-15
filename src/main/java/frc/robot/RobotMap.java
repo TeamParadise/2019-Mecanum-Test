@@ -36,4 +36,16 @@ public class RobotMap {
 
     //talons
     public static final int kLiftChannel = 0;
+
+    //lift info
+    public static final int kLiftBottom = 0;
+
+    public static final int kLiftDiscLevel1 = 1000;
+    public static final int kLiftBallLevel1 = 2000;
+
+    public static final int kLiftDiscLevel2 = 5000;
+    public static final int kLiftBallLevel2 = 6000;
+
+    public static final int kLiftDiscLevel3 = 9000;
+    public static final int kLiftBallLevel3 = 10000;
 }

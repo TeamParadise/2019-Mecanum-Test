@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.PWMVictorSPX;
 //import edu.wpi.first.wpilibj.SpeedController;
@@ -39,13 +40,21 @@ public class Robot extends TimedRobot {
  
 
  public static Pneumatic discGrabber = new Pneumatic(0,1);
+
+ public static int reportLoops = 0; //used to loop thru whats reporting
+ public static final boolean debugTrace = false; //if true dumps info to dirverstation
  
  
  @Override
  public void robotInit() {
-   rightSonar.setAutomaticMode(true);
-   leftSonar.setAutomaticMode(true);
-   CameraServer.getInstance().addAxisCamera("Camera", "10.11.65.3");
+  rightSonar.setAutomaticMode(true);
+  leftSonar.setAutomaticMode(true);
+  CameraServer.getInstance().addAxisCamera("Camera", "10.11.65.3");
+
+  //SmartDashboard.putData(new LiftToHeight(RobotMap.kLiftBottom));
+  //SmartDashboard.putData(new LiftToHeight(RobotMap.kLiftDiscLevel1));
+  SmartDashboard.putData(new LiftToHeight(RobotMap.kLiftBallLevel3));
+
    
 /*   try {
     Field field1 = rightSonar.getClass().getDeclaredField("m_sensors");
@@ -79,17 +88,19 @@ public class Robot extends TimedRobot {
  @Override
  public void teleopPeriodic() {
 
-  //System.out.printf("left: %f, right: %f\n", leftSonar.getRangeInches(), rightSonar.getRangeInches());
-
-    SmartDashboard.putNumber("Left Sonar", (int)leftSonar.getRangeInches());
-    SmartDashboard.putNumber("Right Sonar", (int)rightSonar.getRangeInches());
-    // SmartDashboard.putData(new LiftToHeight(0));
-    SmartDashboard.putData(new LiftToHeight(1000));
-    // SmartDashboard.putData(new LiftToHeight(2000));
-
     //if (m_stick.getRawButtonPressed(11)) LiftToHeight(1000);
 
-    lift.report();
+    //we don't need to report everything every time and io is slow let's slow this down
+    if (++reportLoops == 1)
+    {
+      if (debugTrace) DriverStation.reportWarning("Report Sonar", false);
+      //System.out.printf("left: %f, right: %f\n", leftSonar.getRangeInches(), rightSonar.getRangeInches());
+    
+     SmartDashboard.putNumber("Left Sonar", (int)leftSonar.getRangeInches());
+      SmartDashboard.putNumber("Right Sonar", (int)rightSonar.getRangeInches());
+    }
+    else if (reportLoops ==2) lift.report(debugTrace);
+    else if (reportLoops == 10) reportLoops = 0; //start the reporting process over
 
     if (m_stick.getRawButton(RobotMap.kResetLiftPosition)) lift.resetLiftPosition(); 
 

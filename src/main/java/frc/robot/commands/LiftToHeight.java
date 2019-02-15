@@ -32,20 +32,19 @@ public class LiftToHeight extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.lift.moveLiftToPosition(heightInTicks);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
+    Robot.lift.moveLiftToPosition(heightInTicks);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(Robot.lift.Liftmotor.getSelectedSensorPosition(0)) >5000;
-    //return false;
+   return Robot.lift.Liftmotor.getSelectedSensorPosition(0) == heightInTicks && Robot.lift.Liftmotor.getSelectedSensorVelocity() == 0;
+   //return false;
   }
 
   // Called once after isFinished returns true
