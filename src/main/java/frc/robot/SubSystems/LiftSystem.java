@@ -36,7 +36,7 @@ public class LiftSystem extends Subsystem {
 
 	public static boolean kMotorInvert = false;
 
-  public final double kP = 0.15; //0.15;
+  public final double kP = 0.35; //0.15;
 	public final double kI = 0.0;
 	public final double kD = 1.0;
 	public final double kF = 0.0;
@@ -45,10 +45,11 @@ public class LiftSystem extends Subsystem {
   
   /** Used to create string thoughout loop */
   boolean _printresults = true;
-	StringBuilder _sb = new StringBuilder();
 	int _loops = 100;
+	String lastReport = "none";
+	public int target;
 
-	public static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
+	public TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 
   public LiftSystem() {
     /* Config the sensor used for Primary PID and sensor direction */
@@ -105,39 +106,73 @@ public class LiftSystem extends Subsystem {
 		/* Set the quadrature (relative) sensor to match absolute */
 		Liftmotor.setSelectedSensorPosition(absolutePosition, kPIDLoopIdx, kTimeoutMs);
 
+		Liftmotor.set(ControlMode.PercentOutput,0); //start the motor in % mode
+
    }
 
   //uses the PID internal to the Talon as configured in initialization to move the lift to the desired height
   public void moveLiftToPosition(int desiredheight)
   {
 		//ref: https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/tree/master/Java/PositionClosedLoop/src/main/java/frc/robot
- 		/* Prepare line to print */
-		_sb.append("\tout:");
-		/* Cast Talon's current output percentageto int to remove decimal places */
-		_sb.append((int) (Liftmotor.getMotorOutputPercent() * 100));
-		_sb.append("%");	// Percent
-
-		_sb.append("\tVel:");
-		_sb.append(Liftmotor.getSelectedSensorVelocity());
-
-		_sb.append("\tpos:");
-		_sb.append(Liftmotor.getSelectedSensorPosition(0));
-    _sb.append("u"); 	// Native units
-		
 	//	if (Liftmotor.getSelectedSensorVelocity()==0)
     	//a cimcoder has 20 ticks per revolution, but in this case we know how many ticks we desire
-    	Liftmotor.set(ControlMode.Position, desiredheight);
+			Liftmotor.set(ControlMode.Position, desiredheight);
+			target = desiredheight;
+
+  } 
+
+  public double liftPosition()
+  {
+   // System.out.println( "Tal:" + Liftmotor.getSelectedSensorPosition(0)+","+Liftmotor.getSelectedSensorVelocity(0));
+   // System.out.println();
+    return(Liftmotor.getSelectedSensorPosition(0));
+  }
+
+  public void resetLiftPosition(){
+    Liftmotor.setSelectedSensorPosition(0);
+  }
+  @Override
+  public void initDefaultCommand() {
+    setDefaultCommand(new LiftWithJoyStick());
+  }
+
+	public void report(boolean debugTrace)
+	{
+		if (debugTrace) DriverStation.reportWarning("Report Lift", false);
+
+		StringBuilder _sb = new StringBuilder();
+ 		/* Prepare line to print */
+		//  _sb.append("out:");
+		 /* Cast Talon's current output percentageto int to remove decimal places */
+		 _sb.append((int) (Liftmotor.getMotorOutputPercent() * 100));
+		 _sb.append("%");	// Percent
+ 
+		 _sb.append(" Vel:");
+		 _sb.append(Liftmotor.getSelectedSensorVelocity());
+ 
+		 _sb.append(" pos:");
+		 _sb.append(Liftmotor.getSelectedSensorPosition(0));
+		 _sb.append("u"); 	// Native units
 
     /* If Talon is in position closed-loop, print some more info */
 		if (Liftmotor.getControlMode() == ControlMode.Position) {
 			/* ppend more signals to print when in speed mode. */
-			_sb.append("\terr:");
+			_sb.append(" err:");
 			_sb.append(Liftmotor.getClosedLoopError(0));
 			_sb.append("u");	// Native Units
 
-			_sb.append("\ttrg:");
-			_sb.append(desiredheight);
+			_sb.append(" trg:");
+			_sb.append(target);
       _sb.append("u");	/// Native Units
+
+			String output = _sb.toString();
+		 
+     if (!lastReport.equals(output))
+    {
+      SmartDashboard.putString("Lift", output);
+      lastReport = output;
+    }
+
       
     /**
 		 * Print every ten loops, printing too much too fast is generally bad
@@ -149,31 +184,7 @@ public class LiftSystem extends Subsystem {
 		}
 
 		/* Reset built string for next loop */
-		_sb.setLength(0);
+		// _sb.setLength(0);
 		}
-	
-  } 
-
-  public double liftPosition()
-  {
-   // System.out.println( "Tal:" + Liftmotor.getSelectedSensorPosition(0)+","+Liftmotor.getSelectedSensorVelocity(0));
-   // System.out.println();
-    return(Liftmotor.getSelectedSensorPosition(0));
-  }
-
-  public void resetLiftPosition(){
-    LiftSystem.Liftmotor.setSelectedSensorPosition(0);
-  }
-  @Override
-  public void initDefaultCommand() {
-    setDefaultCommand(new LiftWithJoyStick());
-  }
-
-	public void report(boolean debugTrace)
-	{
-		if (debugTrace) DriverStation.reportWarning("Report Lift", false);
-    SmartDashboard.putNumber("Velocity:", Liftmotor.getSelectedSensorVelocity());
-    SmartDashboard.putNumber("Position:", liftPosition());
-    SmartDashboard.putNumber("Out %", Liftmotor.getMotorOutputPercent());
   }
 }

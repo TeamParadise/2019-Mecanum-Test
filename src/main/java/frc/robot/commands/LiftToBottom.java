@@ -11,42 +11,34 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
-import frc.robot.SubSystems.LiftSystem;
 
-
-public class LiftWithJoyStick extends Command {
-  public LiftWithJoyStick() {
+public class LiftToBottom extends Command {
+  public LiftToBottom() {
+    // Use requires() here to declare subsystem dependencies
     requires(Robot.lift);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.lift.Liftmotor.set(ControlMode.PercentOutput,-0.3);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double power = 0;
-    power = Robot.m_stick.getThrottle();
-    if (Math.abs(power) < 0.2  || !Robot.m_stick.getRawButton(RobotMap.kConfirmManualLift)) power = 0;
-    //System.out.println(power);
-    //set the motor to percent output -1.0 to 1 and feed the throttle position to get power
-    Robot.lift.Liftmotor.set(ControlMode.PercentOutput,power);
-   // System.out.println(LiftSystem.Liftmotor.getEncPosition());
-
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.lift.Liftmotor.getSelectedSensorVelocity() == 0;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.lift.Liftmotor.set(ControlMode.PercentOutput,0);
   }
 
   // Called when another command which requires one or more of the same
