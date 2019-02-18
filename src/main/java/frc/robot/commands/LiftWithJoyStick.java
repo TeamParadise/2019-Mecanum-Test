@@ -5,14 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.Commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.SubSystems.LiftSystem;
 
 
 public class LiftWithJoyStick extends Command {
@@ -33,7 +32,7 @@ public class LiftWithJoyStick extends Command {
     if (Math.abs(power) < 0.2  || !Robot.m_stick.getRawButton(RobotMap.kConfirmManualLift)) power = 0;
     //System.out.println(power);
     //set the motor to percent output -1.0 to 1 and feed the throttle position to get power
-    Robot.lift.Liftmotor.set(ControlMode.PercentOutput,power);
+    Robot.lift.liftMotorSet(ControlMode.PercentOutput,power);
    // System.out.println(LiftSystem.Liftmotor.getEncPosition());
 
   }

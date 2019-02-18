@@ -8,7 +8,6 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.PWMVictorSPX;
 //import edu.wpi.first.wpilibj.SpeedController;
@@ -18,13 +17,15 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.SubSystems.ConfigureRobot;
+import frc.robot.CommandGroups.ConfigureRobot;
+import frc.robot.CommandGroups.MoveLift;
+import frc.robot.Commands.LiftToHeight;
+import frc.robot.Commands.LiftWithJoyStick;
 import frc.robot.SubSystems.DriveTrain;
 import frc.robot.SubSystems.LiftSystem;
-import frc.robot.SubSystems.Pneumatic;
+import frc.robot.SubSystems.PneumaticDouble;
+import frc.robot.SubSystems.PneumaticSingle;
 import frc.robot.SubSystems.Sonar;
-import frc.robot.commands.LiftToHeight;
-import frc.robot.commands.LiftWithJoyStick;
 
 /**
  * This is a demo program showing how to use Mecanum control with the RobotDrive
@@ -39,7 +40,8 @@ public class Robot extends TimedRobot {
  public static Joystick m_stick = new Joystick(RobotMap.kJoystickChannel);;
  SendableChooser<Integer> chooser;
  
- public static Pneumatic discGrabber = new Pneumatic(0,1);
+ public static PneumaticDouble discGrabber = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kGrabExtendChannel, RobotMap.kGrabRetractChannel);
+ public static PneumaticSingle brakeGrabber = new PneumaticSingle(RobotMap.kPcm0 , RobotMap.kBrakeChannel);
 
  public static Sonar sonar = new Sonar();
 
@@ -62,6 +64,10 @@ public class Robot extends TimedRobot {
   chooser.addObject("Lift Bottom", RobotMap.kLiftBottom);
   chooser.addObject("Disc Level 1", RobotMap.kLiftDiscLevel1);
   chooser.addObject("Ball Level 1", RobotMap.kLiftBallLevel1);
+  chooser.addObject("Disc Level 2", RobotMap.kLiftDiscLevel2);
+  chooser.addObject("Ball Level 2", RobotMap.kLiftBallLevel2);
+  chooser.addObject("Disc Level 3", RobotMap.kLiftDiscLevel3);
+  chooser.addObject("Ball Level 3", RobotMap.kLiftBallLevel3);
   SmartDashboard.putData(chooser);
 
   /*   try {
@@ -113,21 +119,22 @@ public class Robot extends TimedRobot {
       chooserCommand = chooser.getSelected();
       //SmartDashboard.putNumber("Command Running is ", chooserCommand);
       if(chooserCommand != -1)
-        new LiftToHeight(chooserCommand).start();
+        new MoveLift(chooserCommand).start();
       else
         new LiftWithJoyStick().start();
     }
     //we don't need to report everything every time and io is slow let's slow this down
     if (++reportLoops == 1) sonar.report(debugTrace);
     else if (reportLoops ==2) lift.report(debugTrace);
+    else if (reportLoops ==3) driveTrain.report(debugTrace);
     else if (reportLoops == 10) reportLoops = 0; //start the reporting process over
 
-    if (m_stick.getRawButton(RobotMap.kResetLiftPosition)) lift.resetLiftPosition(); 
+    //if (m_stick.getRawButton(RobotMap.kResetLiftPosition)) lift.resetLiftPosition(); 
 
 
-    if (m_stick.getRawButtonPressed(RobotMap.kGrabExtend)) discGrabber.extend();
-    if (m_stick.getRawButtonPressed(RobotMap.kGrabRetract)) discGrabber.retract();
-    if (m_stick.getRawButtonPressed(RobotMap.kGrabIdle)) discGrabber.idle();
+    //if (m_stick.getRawButtonPressed(RobotMap.kGrabExtend)) discGrabber.extend();
+    //if (m_stick.getRawButtonPressed(RobotMap.kGrabRetract)) discGrabber.retract();
+    //if (m_stick.getRawButtonPressed(RobotMap.kGrabIdle)) discGrabber.idle();
 
     
     Scheduler.getInstance().run(); //causes all default commands to run

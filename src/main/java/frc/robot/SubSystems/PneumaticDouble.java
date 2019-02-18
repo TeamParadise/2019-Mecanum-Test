@@ -13,15 +13,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * Add your docs here.
  */
-public class Pneumatic extends Subsystem {
+public class PneumaticDouble extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
   DoubleSolenoid doubleSolenoid;
   
-  public Pneumatic(int extendChannel, int retractChannel)
+  public PneumaticDouble(int pcm, int extendChannel, int retractChannel)
   {
-    doubleSolenoid = new DoubleSolenoid(0, 1);
+    doubleSolenoid = new DoubleSolenoid(pcm, extendChannel, retractChannel);
   }
 
 

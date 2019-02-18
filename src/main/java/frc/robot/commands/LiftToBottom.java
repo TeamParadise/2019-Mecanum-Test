@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.Commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
@@ -21,7 +21,7 @@ public class LiftToBottom extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.lift.Liftmotor.set(ControlMode.PercentOutput,-0.3);
+    Robot.lift.liftMotorSet(ControlMode.PercentOutput,-0.3);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -32,13 +32,13 @@ public class LiftToBottom extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.lift.Liftmotor.getSelectedSensorVelocity() == 0;
+    return Robot.lift.liftMotorGetVelocity() == 0;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.lift.Liftmotor.set(ControlMode.PercentOutput,0);
+    Robot.lift.liftMotorSet(ControlMode.PercentOutput,0);
   }
 
   // Called when another command which requires one or more of the same

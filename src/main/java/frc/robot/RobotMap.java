@@ -13,12 +13,14 @@ package frc.robot;
 public class RobotMap {
     public static final int kJoystickChannel = 0;
     //Joystick buttons
-    public static final int kGrabExtend = 7;
-    public static final int kGrabRetract = 8;
-    public static final int kGrabIdle = 9;
+    public static final int kBallShoot = 1;
+    public static final int kBallpickup  = 2;
+    public static final int kDiscPlace = 3;
+    public static final int kDiscGet = 4;
+    //public static final int kGrabIdle = 9;
  
-    public static final int kConfirmManualLift = 6;
-    public static final int kResetLiftPosition = 12;
+    public static final int kConfirmManualLift = 11;
+    //public static final int kResetLiftPosition = 12;
     //lift can manually be moved by pressing 6 and moving the throttle
  
     //DIO
@@ -36,6 +38,7 @@ public class RobotMap {
 
     //talons
     public static final int kLiftChannel = 0;
+    public static final int kBallChannel = 1;
 
     //lift info
     public static final int kLiftBottom = 0;
@@ -48,4 +51,14 @@ public class RobotMap {
 
     public static final int kLiftDiscLevel3 = 9000;
     public static final int kLiftBallLevel3 = 10000;
-}
+
+    //Pneumatics
+    public static final int kPcm0 = 0;
+    public static final int kGrabExtendChannel = 0;
+    public static final int kGrabRetractChannel = 1;
+    public static final int kGrabUpwards = 2;
+    public static final int kGrabDownwards = 3;
+    public static final int kBallExtend = 4;
+    public static final int kBallRetract = 5;
+    public static final int kBrakeChannel = 6;
+} 

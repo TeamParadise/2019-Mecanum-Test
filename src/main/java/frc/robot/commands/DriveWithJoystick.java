@@ -1,11 +1,8 @@
-package frc.robot.commands;
+package frc.robot.Commands;
 
 import frc.robot.Robot;
-import frc.robot.SubSystems.DriveTrain;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 public class DriveWithJoystick extends Command
 {
@@ -27,9 +24,6 @@ public class DriveWithJoystick extends Command
 	protected void execute()
 	{
 		Robot.driveTrain.driveCartesian(Robot.m_stick.getX(), Robot.m_stick.getY(), Robot.m_stick.getZ(), 0);
-		
-		
-		Robot.driveTrain.report();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

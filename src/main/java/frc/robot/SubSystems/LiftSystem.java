@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.LiftWithJoyStick;
+import frc.robot.Commands.LiftWithJoyStick;
 
 /**
  * Add your docs here.
@@ -49,7 +49,7 @@ public class LiftSystem extends Subsystem {
 	String lastReport = "none";
 	public int target;
 
-	public TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
+private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 
   public LiftSystem() {
     /* Config the sensor used for Primary PID and sensor direction */
@@ -107,9 +107,23 @@ public class LiftSystem extends Subsystem {
 		Liftmotor.setSelectedSensorPosition(absolutePosition, kPIDLoopIdx, kTimeoutMs);
 
 		Liftmotor.set(ControlMode.PercentOutput,0); //start the motor in % mode
-
+		
    }
+	 
+	 public void liftMotorSet(ControlMode controlMode, double outputValue)
+	 {
+			Liftmotor.set(controlMode, outputValue);
+	 }
 
+	 public int liftMotorGetVelocity()
+	 {
+			return Liftmotor.getSelectedSensorVelocity();
+	 }
+	 
+	 public int liftMotorGetSensorPosition()
+	 {
+		 return Liftmotor.getSelectedSensorPosition();
+	 }
   //uses the PID internal to the Talon as configured in initialization to move the lift to the desired height
   public void moveLiftToPosition(int desiredheight)
   {
@@ -130,7 +144,8 @@ public class LiftSystem extends Subsystem {
 
   public void resetLiftPosition(){
     Liftmotor.setSelectedSensorPosition(0);
-  }
+	}
+	
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new LiftWithJoyStick());

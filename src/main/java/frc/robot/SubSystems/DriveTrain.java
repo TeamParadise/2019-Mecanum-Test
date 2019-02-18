@@ -1,12 +1,13 @@
 package frc.robot.SubSystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.DriveWithJoystick;
+import frc.robot.Commands.DriveWithJoystick;
 
 public class DriveTrain extends Subsystem
 {
@@ -21,21 +22,12 @@ public class DriveTrain extends Subsystem
 	WPI_VictorSPX frontRight = new WPI_VictorSPX(RobotMap.kFrontRightChannel);
 	WPI_VictorSPX rearRight = new WPI_VictorSPX(RobotMap.kRearRightChannel);
 
-	private int rearLeftVal = 0;
-	private int rearRightVal = 1;
-
-	private static final double Kp = 0.3;
-	private static final double Ki = 0.0;
-	private static final double Kd = 0.0;
-	
-	private static final int kMaxNumberOfMotors = 2;
-	
-	private static final double maxOutput = 0.85;
-
 	public MecanumDrive robotDrive;
 	
 	private boolean isRunning = false;
 	
+	private String lastReport = "none";
+
  	public DriveTrain()
 	{
 		robotDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
@@ -67,7 +59,36 @@ public class DriveTrain extends Subsystem
 	{
 		return isRunning;
 	}	
-	public void report()
+	public void report(boolean debugTrace)
 	{
-  }
+		if (debugTrace) DriverStation.reportWarning("Report DriveTrain", false);
+
+		StringBuilder _sb = new StringBuilder();
+ 		/* Prepare line to print */
+		//  _sb.append("out:");
+		 /* Cast Talon's current output percentageto int to remove decimal places */
+		 _sb.append("fl: ");	// FrontLeft Motor
+		 _sb.append((int) (frontLeft.getMotorOutputPercent() * 100));
+		 _sb.append("%");	// Percent
+
+		 _sb.append(" rl: ");	// RearLeft  Motor
+		 _sb.append((int) (rearLeft.getMotorOutputPercent() * 100));
+		 _sb.append("%");	// Percent
+
+		 _sb.append(" fr: ");	// FrontRight Motor
+		 _sb.append((int) (frontRight.getMotorOutputPercent() * 100));
+		 _sb.append("%");	// Percent
+
+		 _sb.append(" rr: ");	// RearRight Motor
+		 _sb.append((int) (rearRight.getMotorOutputPercent() * 100));
+		 _sb.append("%");	// Percent	
+		
+		 String output = _sb.toString();
+		 
+     if (!lastReport.equals(output))
+    	{	
+     	 	SmartDashboard.putString("DriveTrain", output);
+      		lastReport = output;
+    	}
+	}
 }
