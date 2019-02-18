@@ -9,6 +9,9 @@ package frc.robot.CommandGroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
+import frc.robot.Commands.DiscGrabberExtend;
+import frc.robot.Commands.DiscGrabberRetract;
+import frc.robot.Commands.DiscGrabberUpwards;
 
 public class DiscPickUp extends CommandGroup {
   /**

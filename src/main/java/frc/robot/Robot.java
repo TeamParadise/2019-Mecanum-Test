@@ -17,10 +17,15 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.CommandGroups.BallGet;
+import frc.robot.CommandGroups.BallGot;
 import frc.robot.CommandGroups.ConfigureRobot;
+import frc.robot.CommandGroups.DiscPickUp;
+import frc.robot.CommandGroups.DiscRelease;
 import frc.robot.CommandGroups.MoveLift;
-import frc.robot.Commands.LiftToHeight;
+import frc.robot.Commands.BallShoot;
 import frc.robot.Commands.LiftWithJoyStick;
+import frc.robot.SubSystems.BallMotor;
 import frc.robot.SubSystems.DriveTrain;
 import frc.robot.SubSystems.LiftSystem;
 import frc.robot.SubSystems.PneumaticDouble;
@@ -36,13 +41,15 @@ public class Robot extends TimedRobot {
  private int chooserCommand;
  public static final DriveTrain driveTrain = new DriveTrain();
  public static final LiftSystem lift = new LiftSystem();
+ public static final BallMotor ballMotor = new BallMotor();
  public static MecanumDrive m_robotDrive;
  public static Joystick m_stick = new Joystick(RobotMap.kJoystickChannel);;
  SendableChooser<Integer> chooser;
  
+ public static PneumaticDouble discLifter = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kGrabUpwards, RobotMap.kGrabDownwards);
  public static PneumaticDouble discGrabber = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kGrabExtendChannel, RobotMap.kGrabRetractChannel);
  public static PneumaticSingle brakeGrabber = new PneumaticSingle(RobotMap.kPcm0 , RobotMap.kBrakeChannel);
-
+ 
  public static Sonar sonar = new Sonar();
 
  public static int reportLoops = 0; //used to loop thru whats reporting
@@ -129,9 +136,14 @@ public class Robot extends TimedRobot {
     else if (reportLoops ==3) driveTrain.report(debugTrace);
     else if (reportLoops == 10) reportLoops = 0; //start the reporting process over
 
+    if(m_stick.getRawButton(RobotMap.kBallShoot)) new BallShoot().start();
+    else if (m_stick.getRawButtonReleased(RobotMap.kBallpickup)) new BallGot();
+    else if (m_stick.getRawButton(RobotMap.kBallpickup)) new BallGet().start();
+    else if (m_stick.getRawButton(RobotMap.kDiscPlace)) new DiscRelease().start();
+    else if (m_stick.getRawButton(RobotMap.kDiscGet)) new DiscPickUp().start();
+   
+
     //if (m_stick.getRawButton(RobotMap.kResetLiftPosition)) lift.resetLiftPosition(); 
-
-
     //if (m_stick.getRawButtonPressed(RobotMap.kGrabExtend)) discGrabber.extend();
     //if (m_stick.getRawButtonPressed(RobotMap.kGrabRetract)) discGrabber.retract();
     //if (m_stick.getRawButtonPressed(RobotMap.kGrabIdle)) discGrabber.idle();
