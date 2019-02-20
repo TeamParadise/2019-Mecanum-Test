@@ -112,6 +112,15 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 	 
 	 public void liftMotorSet(ControlMode controlMode, double outputValue)
 	 {
+			if (liftPosition() >= RobotMap.kLiftTop)
+			{
+				outputValue = 0;
+				DriverStation.reportWarning("Attempt to drive lift past top.", false);
+			} else if (liftPosition() <= RobotMap.kLiftBottom)
+			{
+				outputValue = 0;
+				DriverStation.reportWarning("Attempt to drive lift below bottom.", false);
+			}
 			Liftmotor.set(controlMode, outputValue);
 	 }
 
@@ -130,6 +139,17 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 		//ref: https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/tree/master/Java/PositionClosedLoop/src/main/java/frc/robot
 	//	if (Liftmotor.getSelectedSensorVelocity()==0)
     	//a cimcoder has 20 ticks per revolution, but in this case we know how many ticks we desire
+			if (desiredheight > RobotMap.kLiftTop)
+			{
+				desiredheight = RobotMap.kLiftTop;
+				DriverStation.reportWarning("Attempt to move lift above top.",false);
+			}
+			else if (desiredheight < RobotMap.kLiftBottom)
+			{
+				desiredheight = RobotMap.kLiftBottom;
+				DriverStation.reportWarning("Attempt to move lift below bottom.",false);
+			}
+
 			Liftmotor.set(ControlMode.Position, desiredheight);
 			target = desiredheight;
 
