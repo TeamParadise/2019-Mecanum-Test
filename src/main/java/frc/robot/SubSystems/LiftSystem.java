@@ -153,6 +153,8 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 
 	public void report(boolean debugTrace)
 	{
+		boolean showextradata = false;
+
 		if (debugTrace) DriverStation.reportWarning("Report Lift", false);
 
 		StringBuilder _sb = new StringBuilder();
@@ -163,14 +165,16 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 		 _sb.append("%");	// Percent
  
 		 _sb.append(" Vel:");
+		 
 		 _sb.append(Liftmotor.getSelectedSensorVelocity());
  
 		 _sb.append(" pos:");
 		 _sb.append(Liftmotor.getSelectedSensorPosition(0));
-		 _sb.append("u"); 	// Native units
+		 _sb.append("u"); 	// Native units 
 
     /* If Talon is in position closed-loop, print some more info */
-		if (Liftmotor.getControlMode() == ControlMode.Position) {
+		if (Liftmotor.getControlMode() == ControlMode.Position)
+		{
 			/* ppend more signals to print when in speed mode. */
 			_sb.append(" err:");
 			_sb.append(Liftmotor.getClosedLoopError(0));
@@ -178,28 +182,28 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 
 			_sb.append(" trg:");
 			_sb.append(target);
-      _sb.append("u");	/// Native Units
+			_sb.append("u");	/// Native Units
+			
+			showextradata = _printresults;
+		}
 
-			String output = _sb.toString();
-		 
-     if (!lastReport.equals(output))
+		String output = _sb.toString();
+			
+    if (!lastReport.equals(output))
     {
-      SmartDashboard.putString("Lift", output);
+       SmartDashboard.putString("Lift", output);
       lastReport = output;
     }
 
-      
     /**
 		 * Print every ten loops, printing too much too fast is generally bad
 		 * for performance.
 		 */
-		if (++_loops >= 10) {
+		if (++_loops >= 10)
+		{
 			_loops = 0;
-			if (_printresults) System.out.println(_sb.toString());
+			if (showextradata) System.out.println(_sb.toString());
 		}
 
-		/* Reset built string for next loop */
-		// _sb.setLength(0);
-		}
   }
 }

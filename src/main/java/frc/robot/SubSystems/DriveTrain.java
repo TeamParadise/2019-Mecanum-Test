@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.Commands.DriveWithJoystick;
 
@@ -27,6 +28,8 @@ public class DriveTrain extends Subsystem
 	private boolean isRunning = false;
 	
 	private String lastReport = "none";
+
+	private boolean autoDrive = false;
 
  	public DriveTrain()
 	{
@@ -51,7 +54,26 @@ public class DriveTrain extends Subsystem
     isRunning = Math.abs(x) >= 0.2 || Math.abs(y) >= 0.2 || Math.abs(twist) >= 0.3 ? true : false;
     
 	//	DriverStation.reportWarning(x+","+y+","+twist, false);
-	robotDrive.driveCartesian(x, -y, twist*.5, gyroAngle);
+	if (!autoDrive) robotDrive.driveCartesian(x, -y, twist*.5, gyroAngle);
+		// SmartDashboard.putNumber("Heading", Robot.navXSource.getHeading());
+	}
+	
+	public void setAutoDrive(boolean on)
+	{
+		autoDrive = on;
+	}
+
+	public void driveWithSonar()
+	{
+		double x = 0; 
+		double y = -0.3; 
+		double twist = -Robot.sonar.sonarDifference() / 20.0; 
+		double gyroAngle = 0;
+
+	//System.out.println(Robot.sonar.sonarDifference());
+		
+	//	DriverStation.reportWarning(x+","+y+","+twist, false);
+	robotDrive.driveCartesian(x, -y, twist, gyroAngle);
 		// SmartDashboard.putNumber("Heading", Robot.navXSource.getHeading());
 	}
 	

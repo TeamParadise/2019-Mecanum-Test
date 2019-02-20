@@ -20,9 +20,10 @@ public class Sonar extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public Ultrasonic leftSonar = new Ultrasonic(RobotMap.kLeftPingChannel,RobotMap.kLeftEchoChannel,Ultrasonic.Unit.kInches);
-  public Ultrasonic rightSonar = new Ultrasonic(RobotMap.kRightPingChannel,RobotMap.kRightEchoChannel,Ultrasonic.Unit.kInches);
+  private static Ultrasonic leftSonar = new Ultrasonic(RobotMap.kLeftPingChannel,RobotMap.kLeftEchoChannel,Ultrasonic.Unit.kInches);
+  private static Ultrasonic rightSonar = new Ultrasonic(RobotMap.kRightPingChannel,RobotMap.kRightEchoChannel,Ultrasonic.Unit.kInches);
   private String lastReport = "";
+  private double lastDiff = -1;
 
   public Sonar()
   {
@@ -35,6 +36,28 @@ public class Sonar extends Subsystem {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
+ 
+  public double righttDistance()
+  {
+    return rightSonar.getRangeInches();
+  }
+
+  public double leftDistance()
+  {
+    return leftSonar.getRangeInches();
+  }
+ 
+  public double sonarDifference()
+  {
+    double difference = righttDistance() - leftDistance();
+    double tempdiff = difference;
+    if (lastDiff != -1 && Math.abs(lastDiff - difference) >51)
+      difference = 0;
+    else if(Math.abs(difference) < .1 )
+      difference = 0;
+    else lastDiff = difference;
+    return difference;
+  }
 
   public void report(boolean debugTrace)
   {
@@ -44,9 +67,14 @@ public class Sonar extends Subsystem {
     StringBuilder _sb = new StringBuilder();
     _sb.setLength(0);
     _sb.append("Lt:");
-    _sb.append((int)leftSonar.getRangeInches());
+    _sb.append((int)leftDistance());
     _sb.append(" Rt:");
-    _sb.append((int)rightSonar.getRangeInches());
+    _sb.append((int)righttDistance());
+    _sb.append(" Diff:");
+    //int diff = (int)(sonarDifference()*10);
+   // _sb.append(diff/10.0);
+   _sb.append(String.format("%.1f", sonarDifference()));
+   
 
     String output = _sb.toString();
     if (!lastReport.equals(output))
