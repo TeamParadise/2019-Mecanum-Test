@@ -121,8 +121,20 @@ public class Robot extends TimedRobot {
 
 
  @Override
- public void teleopPeriodic() {
+ public void autonomousPeriodic() {
+   super.autonomousPeriodic();
+   runRobot();
+ }
 
+ @Override
+ public void teleopPeriodic()
+ {
+   super.teleopPeriodic();
+   runRobot();
+ }
+
+public void runRobot()
+{
     configureRobot();
     //if (m_stick.getRawButtonPressed(11)) LiftToHeight(1000);
     if(chooserCommand != chooser.getSelected())

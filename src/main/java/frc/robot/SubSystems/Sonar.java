@@ -21,13 +21,13 @@ public class Sonar extends Subsystem {
   // here. Call these from Commands.
 
   private static Ultrasonic leftSonar = new Ultrasonic(RobotMap.kLeftPingChannel,RobotMap.kLeftEchoChannel,Ultrasonic.Unit.kInches);
-  //private static Ultrasonic rightSonar = new Ultrasonic(RobotMap.kRightPingChannel,RobotMap.kRightEchoChannel,Ultrasonic.Unit.kInches);
+  private static Ultrasonic rightSonar = new Ultrasonic(RobotMap.kRightPingChannel,RobotMap.kRightEchoChannel,Ultrasonic.Unit.kInches);
   private String lastReport = "";
   private double lastDiff = -1;
 
   public Sonar()
   {
-    //rightSonar.setAutomaticMode(true);
+    rightSonar.setAutomaticMode(true);
     leftSonar.setAutomaticMode(true);
   }
 
@@ -39,7 +39,7 @@ public class Sonar extends Subsystem {
  
   public double righttDistance()
   {
-    return 0; //only 1 installed //rightSonar.getRangeInches();
+    return rightSonar.getRangeInches();
   }
 
   public double leftDistance()
