@@ -34,6 +34,8 @@ import frc.robot.SubSystems.PneumaticSingle;
 import frc.robot.SubSystems.Sonar;
 import frc.robot.commands.AutoPilotSonarRobot;
 import frc.robot.commands.BallShoot;
+import frc.robot.commands.BrakeClose;
+import frc.robot.commands.BrakeOpen;
 import frc.robot.commands.LiftWithJoyStick;
 
 /**
@@ -55,7 +57,7 @@ public class Robot extends TimedRobot {
  public static PneumaticDouble discLifter = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kGrabUpwards, RobotMap.kGrabDownwards);
  public static PneumaticDouble discGrabber = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kGrabExtendChannel, RobotMap.kGrabRetractChannel);
  public static PneumaticDouble ballGrabber = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kBallExtend, RobotMap.kBallRetract);
- public static PneumaticSingle brakeGrabber = new PneumaticSingle(RobotMap.kPcm0 , RobotMap.kBrakeChannel);
+ public static PneumaticDouble brakeGrabber = new PneumaticDouble(RobotMap.kPcm0 , RobotMap.kBrakeOpen, RobotMap.kBrakeClose);
  
  public static Sonar sonar = new Sonar();
 
@@ -163,7 +165,11 @@ public void runRobot()
     else if (m_stick.getRawButtonReleased(RobotMap.kDiscGet)) new DiscPickUp().start();
     else if (m_stick.getRawButtonPressed(RobotMap.kDiscGet)) new DiscPickUpExtend().start();
     else if (m_stick.getRawButtonPressed(RobotMap.kDiscPlace)) new DiscReleaseExtend().start();
-     if (m_stick.getRawButtonPressed(9)) new AutoPilotSonarRobot().start();;
+    
+    if(m_stick.getRawButtonPressed(7)) new BrakeOpen().start();
+    if(m_stick.getRawButtonReleased(7)) new BrakeClose().start();
+
+    if (m_stick.getRawButtonPressed(9)) new AutoPilotSonarRobot().start();;
      //if (m_stick.getRawButton(RobotMap.kResetLiftPosition)) lift.resetLiftPosition(); 
     //if (m_stick.getRawButtonPressed(RobotMap.kGrabExtend)) discGrabber.extend();
     //if (m_stick.getRawButtonPressed(RobotMap.kGrabRetract)) discGrabber.retract();

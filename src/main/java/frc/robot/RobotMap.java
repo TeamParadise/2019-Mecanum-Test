@@ -43,24 +43,25 @@ public class RobotMap {
     //lift info
     public static final int kLiftBottom = 0;
 
-    public static final int kLiftDiscLevel1 = 1000;
-    public static final int kLiftBallLevel1 = 2000;
+    public static final int kLiftDiscLevel1 = -1000;
+    public static final int kLiftBallLevel1 = -2000;
 
-    public static final int kLiftDiscLevel2 = 5000;
-    public static final int kLiftBallLevel2 = 6000;
+    public static final int kLiftDiscLevel2 = -5000;
+    public static final int kLiftBallLevel2 = -6000;
 
-    public static final int kLiftDiscLevel3 = 9000;
-    public static final int kLiftBallLevel3 = 10000;
+    public static final int kLiftDiscLevel3 = -9000;
+    public static final int kLiftBallLevel3 = -10000;
 
-    public static final int kLiftTop = 12000;
+    public static final int kLiftTop = -10000;
 
     //Pneumatics
     public static final int kPcm0 = 0;
-    public static final int kGrabExtendChannel = 2;
-    public static final int kGrabRetractChannel = 3;
+    public static final int kGrabExtendChannel = 1;
+    public static final int kGrabRetractChannel = 0;
     public static final int kGrabUpwards = 5;
     public static final int kGrabDownwards = 4;
-    public static final int kBallExtend = 1;
-    public static final int kBallRetract = 0;
-    public static final int kBrakeChannel = 6;
+    public static final int kBallExtend = 2;
+    public static final int kBallRetract = 3;
+    public static final int kBrakeOpen = 6;
+    public static final int kBrakeClose = 7;
 } 

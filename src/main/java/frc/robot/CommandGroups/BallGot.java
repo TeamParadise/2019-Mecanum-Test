@@ -8,6 +8,7 @@
 package frc.robot.CommandGroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.robot.commands.BallMotorStop;
 import frc.robot.commands.BallPickRetract;
 
@@ -16,7 +17,8 @@ public class BallGot extends CommandGroup {
    * Add your docs here.
    */
   public BallGot() {
-   addParallel(new BallMotorStop());
    addSequential(new BallPickRetract());
+   addSequential(new WaitCommand(0.6));
+   addSequential(new BallMotorStop());
   }
 }
