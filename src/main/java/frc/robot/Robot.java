@@ -166,18 +166,18 @@ public void runRobot()
     else if (m_stick.getRawButtonPressed(RobotMap.kDiscGet) || m_stick1.getRawButtonPressed(RobotMap.kDiscGet)) new DiscPickUpExtend().start();
     else if (m_stick.getRawButtonPressed(RobotMap.kDiscPlace) || m_stick1.getRawButtonPressed(RobotMap.kDiscPlace)) new DiscReleaseExtend().start();
     
-    if(m_stick.getRawButtonPressed(7)) new BrakeOpen().start();
-    if(m_stick.getRawButtonReleased(7)) new BrakeClose().start();
-
     // if (m_stick.getRawButton(RobotMap.kBallLevel1) || m_stick1.getRawButton(RobotMap.kBallLevel1)) new MoveLift(RobotMap.kLiftBallLevel1).start();
     // else if (m_stick.getRawButton(RobotMap.kBallLevel2) || m_stick1.getRawButton(RobotMap.kBallLevel2)) new MoveLift(RobotMap.kLiftBallLevel2).start();
-    // else if (m_stick.getRawButton(RobotMap.kBallLevel3) m_stick1.getRawButton(RobotMap.kBallLevel3)) new MoveLift(RobotMap.kLiftBallLevel3).start();
+    // else if (m_stick.getRawButton(RobotMap.kBallLevel3) || m_stick1.getRawButton(RobotMap.kBallLevel3)) new MoveLift(RobotMap.kLiftBallLevel3).start();
     // else if (m_stick.getRawButton(RobotMap.kDiscLevel1) || m_stick1.getRawButton(RobotMap.kDiscLevel1)) new MoveLift(RobotMap.kLiftDiscLevel1).start();
     // else if (m_stick.getRawButton(RobotMap.kDiscLevel2) || m_stick1.getRawButton(RobotMap.kDiscLevel2)) new MoveLift(RobotMap.kLiftDiscLevel2).start();
     // else if (m_stick.getRawButton(RobotMap.kDiscLevel3) || m_stick1.getRawButton(RobotMap.kDiscLevel3)) new MoveLift(RobotMap.kLiftDiscLevel3).start();
     
 
     if (m_stick.getRawButtonPressed(9)) new AutoPilotSonarRobot().start();;
+    if (m_stick.getRawButtonPressed(7)) new BrakeOpen().start();
+    if (m_stick.getRawButtonReleased(7)) new BrakeClose().start();
+
      //if (m_stick.getRawButton(RobotMap.kResetLiftPosition)) lift.resetLiftPosition(); 
     //if (m_stick.getRawButtonPressed(RobotMap.kGrabExtend)) discGrabber.extend();
     //if (m_stick.getRawButtonPressed(RobotMap.kGrabRetract)) discGrabber.retract();
