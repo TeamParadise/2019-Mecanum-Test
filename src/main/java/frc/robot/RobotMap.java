@@ -17,9 +17,18 @@ public class RobotMap {
     public static final int kBallpickup  = 2;
     public static final int kDiscPlace = 3;
     public static final int kDiscGet = 4;
+    
+    
+    public static final int kBallLevel1 = 7;
+    public static final int kBallLevel2 = 9;
+    public static final int kBallLevel3 = 11;
+    public static final int kDiscLevel1 = 8;
+    public static final int kDiscLevel2 = 10;
+    public static final int kDiscLevel3 = 12;
+    
     //public static final int kGrabIdle = 9;
  
-    public static final int kConfirmManualLift = 11;
+    public static final int kConfirmManualLift = 5;
     //public static final int kResetLiftPosition = 12;
     //lift can manually be moved by pressing 6 and moving the throttle
  

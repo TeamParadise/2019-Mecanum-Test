@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
+import frc.robot.commands.BrakeClose;
+import frc.robot.commands.BrakeOpen;
 import frc.robot.commands.LiftWithJoyStick;
 
 /**
@@ -130,6 +132,12 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 			liftPower = 0;
 			DriverStation.reportWarning("Lift at bottom.", false);
 		}
+		// if (liftPower == 0)
+		// {
+		// 	new BrakeClose().start();
+		// }
+		// else new BrakeOpen().start();
+
 Liftmotor.set(controlMode, liftPower);
 	 }
 
