@@ -28,8 +28,8 @@ public class LiftWithJoyStick extends Command {
   @Override
   protected void execute() {
     double power = 0;
-    power = -Robot.m_stick.getThrottle();
-    if (Math.abs(power) < 0.2  || !Robot.m_stick.getRawButton(RobotMap.kConfirmManualLift)) power = 0;
+    power = -Robot.m_stick1.getThrottle();
+    if (Math.abs(power) < 0.2  || !Robot.m_stick1.getRawButton(RobotMap.kConfirmManualLift)) power = 0;
     //System.out.println(power);
     //set the motor to percent output -1.0 to 1 and feed the throttle position to get power
     Robot.lift.liftMotorSet(ControlMode.PercentOutput,power);

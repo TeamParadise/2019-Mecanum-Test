@@ -31,7 +31,7 @@ public class BallShoot extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !Robot.m_stick.getRawButton(RobotMap.kBallShoot);
+    return !(Robot.m_stick.getRawButton(RobotMap.kBallShoot) && Robot.m_stick1.getRawButton(RobotMap.kBallShoot));
   }
 
   // Called once after isFinished returns true
