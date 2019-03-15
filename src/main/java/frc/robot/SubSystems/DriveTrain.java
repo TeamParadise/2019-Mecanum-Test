@@ -60,7 +60,7 @@ public class DriveTrain extends Subsystem
 		twist = 0;
 	}
 	//	DriverStation.reportWarning(x+","+y+","+twist, false);
-	if (!autoDrive) robotDrive.driveCartesian(x, -y, twist*.5, gyroAngle);
+	if (!autoDrive) robotDrive.driveCartesian(x, -y, twist/4.0, gyroAngle);
 		// SmartDashboard.putNumber("Heading", Robot.navXSource.getHeading());
 	}
 	

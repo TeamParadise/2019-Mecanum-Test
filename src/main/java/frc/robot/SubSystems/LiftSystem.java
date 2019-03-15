@@ -114,7 +114,7 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 	 
 	 public void liftMotorSet(ControlMode controlMode, double liftPower)
 	 {
-		if (liftPosition() > RobotMap.kLiftTop && liftPower < 0)
+		if (liftPosition() < RobotMap.kLiftTop && liftPower < 0)
 		{
 			liftPower = 0;
 			DriverStation.reportWarning("Attempt to drive lift past top.", false);
@@ -122,7 +122,7 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 		{
 			liftPower = 0;
 			DriverStation.reportWarning("Lift at top.", false);
-		} else if (liftPosition() < RobotMap.kLiftBottom && liftPower > 0)
+		} else if (liftPosition() > RobotMap.kLiftBottom && liftPower > 0)
 		{
 			liftPower = 0;
 			DriverStation.reportWarning("Attempt to drive lift below bottom.", false);

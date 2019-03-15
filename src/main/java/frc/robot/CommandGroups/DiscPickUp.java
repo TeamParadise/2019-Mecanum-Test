@@ -18,7 +18,7 @@ public class DiscPickUp extends CommandGroup {
    * Add your docs here.
    */
   public DiscPickUp() {
-    addSequential(new MoveLift(RobotMap.kLiftDiscLevel1), 2);
+    //addSequential(new MoveLift(RobotMap.kLiftDiscLevel1), 2);
     addSequential(new DiscGrabberUpwards(), 2);
     addSequential(new WaitCommand(0.3));
     addSequential(new DiscGrabberRetract(), 2);
