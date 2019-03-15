@@ -110,18 +110,27 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 		
    }
 	 
-	 public void liftMotorSet(ControlMode controlMode, double outputValue)
+	 public void liftMotorSet(ControlMode controlMode, double liftPower)
 	 {
-			if (liftPosition() >= RobotMap.kLiftTop)
-			{
-				outputValue = 0;
-				DriverStation.reportWarning("Attempt to drive lift past top.", false);
-			} else if (liftPosition() <= RobotMap.kLiftBottom)
-			{
-				outputValue = 0;
-				DriverStation.reportWarning("Attempt to drive lift below bottom.", false);
-			}
-			Liftmotor.set(controlMode, outputValue);
+		if (liftPosition() > RobotMap.kLiftTop && liftPower < 0)
+		{
+			liftPower = 0;
+			DriverStation.reportWarning("Attempt to drive lift past top.", false);
+		}	else if (liftPosition() == RobotMap.kLiftTop && liftPower < 0)
+		{
+			liftPower = 0;
+			DriverStation.reportWarning("Lift at top.", false);
+		} else if (liftPosition() < RobotMap.kLiftBottom && liftPower > 0)
+		{
+			liftPower = 0;
+			DriverStation.reportWarning("Attempt to drive lift below bottom.", false);
+		}
+		else if (liftPosition() == RobotMap.kLiftBottom && liftPower > 0)
+		{
+			liftPower = 0;
+			DriverStation.reportWarning("Lift at bottom.", false);
+		}
+Liftmotor.set(controlMode, liftPower);
 	 }
 
 	 public int liftMotorGetVelocity()
@@ -189,7 +198,7 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 		 _sb.append(Liftmotor.getSelectedSensorVelocity());
  
 		 _sb.append(" pos:");
-		 _sb.append(Liftmotor.getSelectedSensorPosition(0));
+		 _sb.append(liftPosition());
 		 _sb.append("u"); 	// Native units 
 
     /* If Talon is in position closed-loop, print some more info */

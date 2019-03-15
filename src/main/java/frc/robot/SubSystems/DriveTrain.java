@@ -52,7 +52,13 @@ public class DriveTrain extends Subsystem
 	public void driveCartesian(double x, double y, double twist, double gyroAngle)
 	{
     isRunning = Math.abs(x) >= 0.2 || Math.abs(y) >= 0.2 || Math.abs(twist) >= 0.3 ? true : false;
-    
+	
+	if (!isRunning)
+	{
+		x = 0;
+		y = 0;
+		twist = 0;
+	}
 	//	DriverStation.reportWarning(x+","+y+","+twist, false);
 	if (!autoDrive) robotDrive.driveCartesian(x, -y, twist*.5, gyroAngle);
 		// SmartDashboard.putNumber("Heading", Robot.navXSource.getHeading());

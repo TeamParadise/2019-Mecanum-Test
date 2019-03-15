@@ -21,6 +21,11 @@ public class BallMotor extends Subsystem {
   // here. Call these from Commands.
   private static TalonSRX Ballmotor  = new TalonSRX(RobotMap.kBallChannel);
 
+  public BallMotor()
+  {
+    Ballmotor.setInverted(true);
+  }
+  
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
