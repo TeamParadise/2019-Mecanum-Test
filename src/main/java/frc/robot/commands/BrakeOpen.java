@@ -20,6 +20,7 @@ public class BrakeOpen extends Command {
   @Override
   protected void initialize() {
     Robot.brakeGrabber.retract();
+    System.out.println("Open");
   }
 
   // Called repeatedly when this Command is scheduled to run

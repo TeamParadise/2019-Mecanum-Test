@@ -17,9 +17,9 @@ public class DiscRelease extends CommandGroup {
    * Add your docs here.
    */
   public DiscRelease() {
-    addSequential(new DiscGrabberDownwards(), 2);
-    addSequential(new WaitCommand(0.1));
-    addSequential(new DiscGrabberRetract(), 2);
+    addSequential(new DiscGrabberDownwards(), 0.8);
+    //addSequential(new WaitCommand(0.1));
+    addSequential(new DiscGrabberRetract(), 0.1);
   
   }
 }

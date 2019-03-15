@@ -150,7 +150,8 @@ public void runRobot()
         new MoveLift(chooserCommand).start();
       else
         new LiftWithJoyStick().start();
-    }
+    } else new LiftWithJoyStick().start();
+
     //we don't need to report everything every time and io is slow let's slow this down
     if (++reportLoops == 1) sonar.report(debugTrace);
     else if (reportLoops == 2) lift.report(debugTrace);
@@ -175,8 +176,8 @@ public void runRobot()
     
 
     if (m_stick.getRawButtonPressed(9)) new AutoPilotSonarRobot().start();;
-    if (m_stick.getRawButtonPressed(7)) new BrakeOpen().start();
-    if (m_stick.getRawButtonReleased(7)) new BrakeClose().start();
+    //if (m_stick.getRawButtonPressed(7)) new BrakeOpen().start();
+    //if (m_stick.getRawButtonReleased(7)) new BrakeClose().start();
 
      //if (m_stick.getRawButton(RobotMap.kResetLiftPosition)) lift.resetLiftPosition(); 
     //if (m_stick.getRawButtonPressed(RobotMap.kGrabExtend)) discGrabber.extend();
