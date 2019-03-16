@@ -165,22 +165,23 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
   //uses the PID internal to the Talon as configured in initialization to move the lift to the desired height
   public void moveLiftToPosition(int desiredheight)
   {
-		//ref: https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/tree/master/Java/PositionClosedLoop/src/main/java/frc/robot
-	//	if (Liftmotor.getSelectedSensorVelocity()==0)
-    	//a cimcoder has 20 ticks per revolution, but in this case we know how many ticks we desire
-			if (desiredheight > RobotMap.kLiftTop)
-			{
-				desiredheight = RobotMap.kLiftTop;
-				DriverStation.reportWarning("Attempt to move lift above top.",false);
-			}
-			else if (desiredheight < RobotMap.kLiftBottom)
-			{
-				desiredheight = RobotMap.kLiftBottom;
-				DriverStation.reportWarning("Attempt to move lift below bottom.",false);
-			}
+	  return;
+		// //ref: https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/tree/master/Java/PositionClosedLoop/src/main/java/frc/robot
+		// //	if (Liftmotor.getSelectedSensorVelocity()==0)
+    	// //a cimcoder has 20 ticks per revolution, but in this case we know how many ticks we desire
+		// 	if (desiredheight > RobotMap.kLiftTop)
+		// 	{
+		// 		desiredheight = RobotMap.kLiftTop;
+		// 		DriverStation.reportWarning("Attempt to move lift above top.",false);
+		// 	}
+		// 	else if (desiredheight < RobotMap.kLiftBottom)
+		// 	{
+		// 		desiredheight = RobotMap.kLiftBottom;
+		// 		DriverStation.reportWarning("Attempt to move lift below bottom.",false);
+		// 	}
 
-			Liftmotor.set(ControlMode.Position, desiredheight);
-			target = desiredheight;
+		// 	Liftmotor.set(ControlMode.Position, desiredheight);
+		// target = desiredheight;
 
   } 
 

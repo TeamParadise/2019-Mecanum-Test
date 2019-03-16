@@ -14,18 +14,19 @@ public class RobotMap {
     public static final int kJoystickChannel = 0;
     public static final int kJoystickChannel1 = 1;
     //Joystick buttons
-    public static final int kBallShoot = 1;
-    public static final int kBallpickup  = 2;
-    public static final int kDiscPlace = 3;
-    public static final int kDiscGet = 4;
+    public static final int kJBallShoot = 12; //not used, but refernce in BallShoot
+    // public static final int kBallpickup  = 2;
+    // public static final int kDiscPlace = 3;
+    // public static final int kDiscGet = 4;
+    public static final int kJGrabberInOut = 1;
+    public static final int kJGrabberUpDown = 2;
     
-    
-    public static final int kBallLevel1 = 7;
-    public static final int kBallLevel2 = 9;
-    public static final int kBallLevel3 = 11;
-    public static final int kDiscLevel1 = 8;
-    public static final int kDiscLevel2 = 10;
-    public static final int kDiscLevel3 = 12;
+    public static final int kJBallLevel1 = 7;
+    public static final int kJBallLevel2 = 9;
+    public static final int kJBallLevel3 = 11;
+    public static final int kJDiscLevel1 = 8;
+    public static final int kJDiscLevel2 = 10;
+    public static final int kJDiscLevel3 = 12;
     
     //public static final int kGrabIdle = 9;
  
@@ -62,7 +63,7 @@ public class RobotMap {
     public static final int kLiftDiscLevel3 = -9000;
     public static final int kLiftBallLevel3 = -10000;
 
-    public static final int kLiftTop = -15000;
+    public static final int kLiftTop = -10000;
 
     //Pneumatics
     public static final int kPcm0 = 0;

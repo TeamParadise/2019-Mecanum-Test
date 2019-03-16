@@ -11,10 +11,12 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 
 public class LiftWithJoyStick extends Command {
+
+  double power = 0;
+
   public LiftWithJoyStick() {
     requires(Robot.lift);
   }
@@ -27,7 +29,6 @@ public class LiftWithJoyStick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double power = 0;
     power = -Robot.m_stick1.getThrottle()/2.0;
     //if (power < -0.2  /*|| !Robot.m_stick1.getRawButton(RobotMap.kConfirmManualLift)*/) power = 0;
     //System.out.println(power);
