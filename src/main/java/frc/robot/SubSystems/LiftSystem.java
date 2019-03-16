@@ -114,7 +114,7 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 	 
 	 public void liftMotorSet(ControlMode controlMode, double liftPower)
 	 {
-		System.out.println("set");
+		//System.out.println("set");
 		if (liftPosition() < RobotMap.kLiftTop && liftPower < 0)
 		{
 			liftPower = 0;
@@ -133,15 +133,15 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 			liftPower = 0;
 			DriverStation.reportWarning("Lift at bottom.", false);
 		}
-		if (liftPower == 0)
+		if (Math.abs(liftPower) <= 0.2 && liftMotorGetVelocity() == 0)
 		{
 			new BrakeClose().start();
-			System.out.println("BC");
+			//System.out.println("BC");
 		}
 		else
 		{
 			 new BrakeOpen().start();
-			 System.out.println("BO");
+			 //System.out.println("BO");
 		}
 		Liftmotor.set(controlMode, liftPower);
 	 }

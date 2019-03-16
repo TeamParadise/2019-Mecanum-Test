@@ -22,12 +22,12 @@ public class LiftToHeight extends Command {
     heightInTicks = tickHeight;
    }
 
-  public LiftToHeight() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    //heightInTicks = 0;
-    requires(Robot.lift);
-  }
+  // public LiftToHeight() {
+  //   // Use requires() here to declare subsystem dependencies
+  //   // eg. requires(chassis);
+  //   //heightInTicks = 0;
+  //   requires(Robot.lift);
+  // }
 
   // Called just before this Command runs the first time
   @Override

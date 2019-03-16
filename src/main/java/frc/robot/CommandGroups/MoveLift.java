@@ -23,7 +23,7 @@ public class MoveLift extends CommandGroup {
     Scheduler.getInstance().removeAll(); //remove all running commands
     addSequential(new BrakeOpen(),2);
     addSequential(new WaitCommand(1));
-    addSequential(new LiftToHeight(),3);
+    addSequential(new LiftToHeight(height),3);
     addSequential(new BrakeClose(), 2);
     }
 }

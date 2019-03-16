@@ -20,7 +20,7 @@ public class BrakeClose extends Command {
   @Override
   protected void initialize() {
     Robot.brakeGrabber.extend();
-    System.out.println("close.");
+    //System.out.println("close.");
   }
 
   // Called repeatedly when this Command is scheduled to run

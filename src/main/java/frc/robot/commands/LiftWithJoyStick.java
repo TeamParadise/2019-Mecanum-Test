@@ -28,8 +28,8 @@ public class LiftWithJoyStick extends Command {
   @Override
   protected void execute() {
     double power = 0;
-    power = -Robot.m_stick1.getThrottle();
-    if (Math.abs(power) < 0.2  || !Robot.m_stick1.getRawButton(RobotMap.kConfirmManualLift)) power = 0;
+    power = -Robot.m_stick1.getThrottle()/2.0;
+    if (Math.abs(power) < 0.2  /*|| !Robot.m_stick1.getRawButton(RobotMap.kConfirmManualLift)*/) power = 0;
     //System.out.println(power);
     //set the motor to percent output -1.0 to 1 and feed the throttle position to get power
     Robot.lift.liftMotorSet(ControlMode.PercentOutput,power);
@@ -40,7 +40,7 @@ public class LiftWithJoyStick extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
