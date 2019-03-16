@@ -30,7 +30,7 @@ public class RobotMap {
     
     //public static final int kGrabIdle = 9;
  
-    public static final int kConfirmManualLift = 5;
+    public static final int kJConfirmManualLift = 5;
     //public static final int kResetLiftPosition = 12;
     //lift can manually be moved by pressing 6 and moving the throttle
  

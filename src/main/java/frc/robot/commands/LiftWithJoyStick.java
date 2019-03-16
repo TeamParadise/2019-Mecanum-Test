@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 
 public class LiftWithJoyStick extends Command {
@@ -30,7 +31,7 @@ public class LiftWithJoyStick extends Command {
   @Override
   protected void execute() {
     power = -Robot.m_stick1.getThrottle()/2.0;
-    //if (power < -0.2  /*|| !Robot.m_stick1.getRawButton(RobotMap.kConfirmManualLift)*/) power = 0;
+    if (/*power < -0.2  ||*/ !Robot.m_stick1.getRawButton(RobotMap.kJConfirmManualLift)) power = 0;
     //System.out.println(power);
     //set the motor to percent output -1.0 to 1 and feed the throttle position to get power
     if (power > 0.1) power = 0.1;
