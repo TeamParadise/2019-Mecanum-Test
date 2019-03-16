@@ -62,7 +62,7 @@ public class RobotMap {
     public static final int kLiftDiscLevel3 = -9000;
     public static final int kLiftBallLevel3 = -10000;
 
-    public static final int kLiftTop = -10000;
+    public static final int kLiftTop = -15000;
 
     //Pneumatics
     public static final int kPcm0 = 0;

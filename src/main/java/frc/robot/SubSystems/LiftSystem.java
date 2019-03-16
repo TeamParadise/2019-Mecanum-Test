@@ -47,6 +47,7 @@ public class LiftSystem extends Subsystem {
   
   /** Used to create string thoughout loop */
   boolean _printresults = true;
+  boolean brakeclosed = false;
 	int _loops = 100;
 	String lastReport = "none";
 	public int target;
@@ -111,8 +112,8 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 		Liftmotor.set(ControlMode.PercentOutput,0); //start the motor in % mode
 		
    }
-	 
-	 public void liftMotorSet(ControlMode controlMode, double liftPower)
+   
+  	 public void liftMotorSet(ControlMode controlMode, double liftPower)
 	 {
 		//System.out.println("set");
 		if (liftPosition() < RobotMap.kLiftTop && liftPower < 0)
@@ -133,14 +134,20 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 			liftPower = 0;
 			DriverStation.reportWarning("Lift at bottom.", false);
 		}
-		if (Math.abs(liftPower) <= 0.2 && liftMotorGetVelocity() == 0)
+		if ((liftPower <= 0 && liftPower >= -0.3))
 		{
-			new BrakeClose().start();
-			//System.out.println("BC");
+			if (liftMotorGetVelocity() == 0)
+			{
+				if (!brakeclosed) new BrakeClose().start();
+				brakeclosed = true;
+				liftPower = 0;
+				//System.out.println("BC");
+			}
 		}
 		else
 		{
-			 new BrakeOpen().start();
+			 if (brakeclosed) new BrakeOpen().start();
+			 brakeclosed = false;
 			 //System.out.println("BO");
 		}
 		Liftmotor.set(controlMode, liftPower);
