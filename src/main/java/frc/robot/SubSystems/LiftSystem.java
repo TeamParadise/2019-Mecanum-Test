@@ -116,24 +116,24 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
   	 public void liftMotorSet(ControlMode controlMode, double liftPower)
 	 {
 		//System.out.println("set");
-		if (liftPosition() < RobotMap.kLiftTop && liftPower < 0)
-		{
-			liftPower = 0;
-			DriverStation.reportWarning("Attempt to drive lift past top.", false);
-		}	else if (liftPosition() == RobotMap.kLiftTop && liftPower < 0)
-		{
-			liftPower = 0;
-			DriverStation.reportWarning("Lift at top.", false);
-		} else if (liftPosition() > RobotMap.kLiftBottom && liftPower > 0)
-		{
-			liftPower = 0;
-			DriverStation.reportWarning("Attempt to drive lift below bottom.", false);
-		}
-		else if (liftPosition() == RobotMap.kLiftBottom && liftPower > 0)
-		{
-			liftPower = 0;
-			DriverStation.reportWarning("Lift at bottom.", false);
-		}
+		// if (liftPosition() < RobotMap.kLiftTop && liftPower < 0)
+		// {
+		// 	liftPower = 0;
+		// 	DriverStation.reportWarning("Attempt to drive lift past top.", false);
+		// }	else if (liftPosition() == RobotMap.kLiftTop && liftPower < 0)
+		// {
+		// 	liftPower = 0;
+		// 	DriverStation.reportWarning("Lift at top.", false);
+		// } else if (liftPosition() > RobotMap.kLiftBottom && liftPower > 0)
+		// {
+		// 	liftPower = 0;
+		// 	DriverStation.reportWarning("Attempt to drive lift below bottom.", false);
+		// }
+		// else if (liftPosition() == RobotMap.kLiftBottom && liftPower > 0)
+		// {
+		// 	liftPower = 0;
+		// 	DriverStation.reportWarning("Lift at bottom.", false);
+		// }
 		if (liftPower == 0 /*(liftPower <= 0 && liftPower >= -0.3) || (!Robot.m_stick1.getRawButton(RobotMap.kJConfirmManualLift))*/)
 		{
 			//if (liftMotorGetVelocity() == 0)
@@ -193,7 +193,7 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
   }
 
   public void resetLiftPosition(){
-    Liftmotor.setSelectedSensorPosition(0);
+	Liftmotor.setSelectedSensorPosition(0);
 	}
 	
   @Override

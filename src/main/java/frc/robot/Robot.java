@@ -126,6 +126,7 @@ public class Robot extends TimedRobot {
   if(!done)
   {
     new ConfigureRobot().start();
+    lift.resetLiftPosition();
   }
   done = true;
  }
