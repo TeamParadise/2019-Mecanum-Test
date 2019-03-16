@@ -7,7 +7,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.cameraserver.CameraServer;
+//import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.PWMVictorSPX;
 //import edu.wpi.first.wpilibj.SpeedController;
@@ -30,7 +30,6 @@ import frc.robot.SubSystems.DriveTrain;
 import frc.robot.SubSystems.LiftSystem;
 import frc.robot.SubSystems.NAVxSubSystem;
 import frc.robot.SubSystems.PneumaticDouble;
-import frc.robot.SubSystems.PneumaticSingle;
 import frc.robot.SubSystems.Sonar;
 import frc.robot.commands.AutoPilotSonarRobot;
 import frc.robot.commands.BallShoot;
@@ -194,7 +193,7 @@ public void runRobot()
     }
     if (m_stick.getRawButtonPressed(RobotMap.kJGrabberUpDown) || m_stick1.getRawButtonPressed(RobotMap.kJGrabberUpDown))
     {
-      if (grabberIn)
+      if (grabberDown)
       {
         new DiscGrabberUpwards().start();
         grabberDown = false;

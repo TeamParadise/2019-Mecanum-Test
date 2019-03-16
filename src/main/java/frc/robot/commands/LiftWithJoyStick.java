@@ -30,11 +30,16 @@ public class LiftWithJoyStick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    power = -Robot.m_stick1.getThrottle()/2.0;
-    if (/*power < -0.2  ||*/ !Robot.m_stick1.getRawButton(RobotMap.kJConfirmManualLift)) power = 0;
-    //System.out.println(power);
-    //set the motor to percent output -1.0 to 1 and feed the throttle position to get power
-    if (power > 0.1) power = 0.1;
+    if (Robot.m_stick1.getRawButton(RobotMap.kJLiftDown))
+      power = 0.1;
+    else if (Robot.m_stick1.getRawButton(RobotMap.kJLiftUp))
+      power = -0.5;
+    else power = 0;
+    // power = -Robot.m_stick1.getThrottle()/2.0;
+    // if (/*power < -0.2  ||*/ !Robot.m_stick1.getRawButton(RobotMap.kJConfirmManualLift)) power = 0;
+    // //System.out.println(power);
+    // //set the motor to percent output -1.0 to 1 and feed the throttle position to get power
+    // if (power > 0.1) power = 0.1;
     Robot.lift.liftMotorSet(ControlMode.PercentOutput,power);
    // System.out.println(LiftSystem.Liftmotor.getEncPosition());
 

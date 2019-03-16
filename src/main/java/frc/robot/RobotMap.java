@@ -20,6 +20,8 @@ public class RobotMap {
     // public static final int kDiscGet = 4;
     public static final int kJGrabberInOut = 1;
     public static final int kJGrabberUpDown = 2;
+    public static final int kJLiftUp = 5;
+    public static final int kJLiftDown = 3;
     
     public static final int kJBallLevel1 = 7;
     public static final int kJBallLevel2 = 9;
@@ -30,7 +32,7 @@ public class RobotMap {
     
     //public static final int kGrabIdle = 9;
  
-    public static final int kJConfirmManualLift = 5;
+    //public static final int kJConfirmManualLift = 5;
     //public static final int kResetLiftPosition = 12;
     //lift can manually be moved by pressing 6 and moving the throttle
  

@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.SubSystems;
-
+import frc.robot.Robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -134,15 +134,15 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 			liftPower = 0;
 			DriverStation.reportWarning("Lift at bottom.", false);
 		}
-		if ((liftPower <= 0 && liftPower >= -0.3))
+		if (liftPower == 0 /*(liftPower <= 0 && liftPower >= -0.3) || (!Robot.m_stick1.getRawButton(RobotMap.kJConfirmManualLift))*/)
 		{
-			if (liftMotorGetVelocity() == 0)
-			{
+			//if (liftMotorGetVelocity() == 0)
+			//{
 				if (!brakeclosed) new BrakeClose().start();
 				brakeclosed = true;
 				liftPower = 0;
 				//System.out.println("BC");
-			}
+			//}
 		}
 		else
 		{
