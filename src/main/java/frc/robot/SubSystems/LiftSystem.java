@@ -134,6 +134,7 @@ private static TalonSRX Liftmotor  = new TalonSRX(RobotMap.kLiftChannel);
 		// 	liftPower = 0;
 		// 	DriverStation.reportWarning("Lift at bottom.", false);
 		// }
+		if (liftPosition() < -10000) liftPower *= .67; else if (liftPosition() > -200 ) liftPower *= 0.5;
 		if (liftPower == 0 /*(liftPower <= 0 && liftPower >= -0.3) || (!Robot.m_stick1.getRawButton(RobotMap.kJConfirmManualLift))*/)
 		{
 			//if (liftMotorGetVelocity() == 0)
