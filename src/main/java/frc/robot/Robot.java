@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 // import frc.robot.CommandGroups.DiscReleaseExtend;
 // import frc.robot.CommandGroups.MoveLift;
 import frc.robot.CommandGroups.ConfigureRobot;
+import frc.robot.SubSystems.AnalogPressureSensor;
 import frc.robot.SubSystems.BallMotor;
 import frc.robot.SubSystems.DriveTrain;
 import frc.robot.SubSystems.LiftSystem;
@@ -63,6 +64,7 @@ public class Robot extends TimedRobot {
  public static PneumaticDouble ballGrabber = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kBallExtend, RobotMap.kBallRetract);
  public static PneumaticDouble brakeGrabber = new PneumaticDouble(RobotMap.kPcm0 , RobotMap.kBrakeOpen, RobotMap.kBrakeClose);
  
+ public static AnalogPressureSensor pressureSensor = new AnalogPressureSensor();
  public static Sonar sonar = new Sonar();
 
  public static int reportLoops = 0; //used to loop thru whats reporting

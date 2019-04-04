@@ -36,6 +36,8 @@ public class RobotMap {
     //public static final int kResetLiftPosition = 12;
     //lift can manually be moved by pressing 6 and moving the throttle
  
+    //Analog Input
+    public static final int analogPressureSensorChannel = 0;
     //DIO
     public static final int kRightPingChannel = 0;
     public static final int kRightEchoChannel = 1;
