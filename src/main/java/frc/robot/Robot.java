@@ -17,8 +17,8 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-// import frc.robot.CommandGroups.BallGet;
-// import frc.robot.CommandGroups.BallGot;
+import frc.robot.CommandGroups.BallGet;
+import frc.robot.CommandGroups.BallGot;
 // import frc.robot.CommandGroups.DiscPickUp;
 // import frc.robot.CommandGroups.DiscPickUpExtend;
 // import frc.robot.CommandGroups.DiscRelease;
@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
  public static Joystick m_stick = new Joystick(RobotMap.kJoystickChannel);
  public static Joystick m_stick1 = new Joystick(RobotMap.kJoystickChannel1);
  
- public static PneumaticDouble discLifter = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kGrabUpwards, RobotMap.kGrabDownwards);
+ public static PneumaticDouble discLifter = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kGrabOpen, RobotMap.kGrabClose);
  public static PneumaticDouble discGrabber = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kGrabExtendChannel, RobotMap.kGrabRetractChannel);
  public static PneumaticDouble ballGrabber = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kBallExtend, RobotMap.kBallRetract);
  public static PneumaticDouble brakeGrabber = new PneumaticDouble(RobotMap.kPcm0 , RobotMap.kBrakeOpen, RobotMap.kBrakeClose);
@@ -174,9 +174,9 @@ public void runRobot()
     else if (reportLoops == 4) NAVx.report(debugTrace);
     else if (reportLoops == 10) reportLoops = 0; //start the reporting process over
 
-    // if(m_stick.getRawButtonPressed(RobotMap.kBallShoot) || m_stick1.getRawButtonPressed(RobotMap.kBallShoot)) new BallShoot().start();
-    // else if (m_stick.getRawButtonReleased(RobotMap.kBallpickup) || m_stick1.getRawButtonReleased(RobotMap.kBallpickup)) new BallGot().start();
-    // else if (m_stick.getRawButtonPressed(RobotMap.kBallpickup) || m_stick1.getRawButtonPressed(RobotMap.kBallpickup) ) new BallGet().start();
+    if(m_stick.getRawButtonPressed(RobotMap.kBallShoot) || m_stick1.getRawButtonPressed(RobotMap.kBallShoot)) new BallShoot().start();
+    else if (m_stick.getRawButtonReleased(RobotMap.kBallpickup) || m_stick1.getRawButtonReleased(RobotMap.kBallpickup)) new BallGot().start();
+    else if (m_stick.getRawButtonPressed(RobotMap.kBallpickup) || m_stick1.getRawButtonPressed(RobotMap.kBallpickup) ) new BallGet().start();
     // else if (m_stick.getRawButtonReleased(RobotMap.kDiscPlace) || m_stick1.getRawButtonReleased(RobotMap.kDiscPlace)) new DiscRelease().start();
     // else if (m_stick.getRawButtonReleased(RobotMap.kDiscGet) || m_stick1.getRawButtonReleased(RobotMap.kDiscGet)) new DiscPickUp().start();
     // else if (m_stick.getRawButtonPressed(RobotMap.kDiscGet) || m_stick1.getRawButtonPressed(RobotMap.kDiscGet)) new DiscPickUpExtend().start();
@@ -194,7 +194,7 @@ public void runRobot()
         grabberIn = true;
       }
     }
-    if (m_stick.getRawButtonPressed(RobotMap.kJGrabberUpDown) || m_stick1.getRawButtonPressed(RobotMap.kJGrabberUpDown))
+    if (m_stick.getRawButtonPressed(RobotMap.kJGrabberOpenClose) || m_stick1.getRawButtonPressed(RobotMap.kJGrabberOpenClose))
     {
       if (grabberDown)
       {

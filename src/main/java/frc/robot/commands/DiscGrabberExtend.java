@@ -13,7 +13,7 @@ import frc.robot.Robot;
 public class DiscGrabberExtend extends Command {
   public DiscGrabberExtend() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.discGrabber);
   }
 
   // Called just before this Command runs the first time

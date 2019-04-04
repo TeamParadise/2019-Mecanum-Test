@@ -14,7 +14,7 @@ import frc.robot.RobotMap;
 public class BallShoot extends Command {
   public BallShoot() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.ballMotor);
   }
 
   // Called just before this Command runs the first time
@@ -26,12 +26,13 @@ public class BallShoot extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !(Robot.m_stick.getRawButton(RobotMap.kJBallShoot) && Robot.m_stick1.getRawButton(RobotMap.kJBallShoot));
+    return !(Robot.m_stick.getRawButton(RobotMap.kBallShoot) || Robot.m_stick1.getRawButton(RobotMap.kBallShoot));
   }
 
   // Called once after isFinished returns true

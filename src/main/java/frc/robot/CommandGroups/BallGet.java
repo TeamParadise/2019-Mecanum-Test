@@ -18,7 +18,7 @@ public class BallGet extends CommandGroup {
    */
   public BallGet() {
    //addSequential(new MoveLift(RobotMap.kLiftBottom), 2);
-   addParallel(new BallIntake());
-   addSequential(new BallPickExtend(), 2);
+   addParallel(new BallPickExtend(), 2);
+   addSequential(new BallIntake());
   }
 }

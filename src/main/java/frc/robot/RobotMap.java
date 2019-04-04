@@ -14,12 +14,12 @@ public class RobotMap {
     public static final int kJoystickChannel = 0;
     public static final int kJoystickChannel1 = 1;
     //Joystick buttons
-    public static final int kJBallShoot = 12; //not used, but refernce in BallShoot
-    // public static final int kBallpickup  = 2;
-    // public static final int kDiscPlace = 3;
+    public static final int kBallShoot = 12; //not used, but refernce in BallShoot
+    public static final int kBallpickup  = 11;
+    //public static final int kDiscPlace = 3;
     // public static final int kDiscGet = 4;
     public static final int kJGrabberInOut = 1;
-    public static final int kJGrabberUpDown = 2;
+    public static final int kJGrabberOpenClose = 2;
     public static final int kJLiftUp = 5;
     public static final int kJLiftDown = 3;
     
@@ -71,12 +71,12 @@ public class RobotMap {
 
     //Pneumatics
     public static final int kPcm0 = 0;
-    public static final int kGrabExtendChannel = 1;
-    public static final int kGrabRetractChannel = 0;
-    public static final int kGrabUpwards = 5;
-    public static final int kGrabDownwards = 4;
-    public static final int kBallExtend = 2;
-    public static final int kBallRetract = 3;
+    public static final int kGrabExtendChannel = 5;
+    public static final int kGrabRetractChannel = 4;
+    public static final int kGrabOpen = 2;
+    public static final int kGrabClose = 3;
+    public static final int kBallExtend = 0;
+    public static final int kBallRetract = 1;
     public static final int kBrakeOpen = 6;
     public static final int kBrakeClose = 7;
 } 

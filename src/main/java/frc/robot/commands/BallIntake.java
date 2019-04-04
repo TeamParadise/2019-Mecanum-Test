@@ -13,7 +13,7 @@ import frc.robot.Robot;
 public class BallIntake extends Command {
   public BallIntake() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.ballMotor);
   }
 
   // Called just before this Command runs the first time
