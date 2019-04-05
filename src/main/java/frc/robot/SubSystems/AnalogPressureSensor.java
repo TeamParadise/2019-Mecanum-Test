@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.ReportPressureSensor;
 import edu.wpi.first.wpilibj.AnalogInput;
 
 public class AnalogPressureSensor extends Subsystem {

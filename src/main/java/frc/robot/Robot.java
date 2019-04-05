@@ -71,8 +71,8 @@ public class Robot extends TimedRobot {
  public static final boolean debugTrace = false; //if true dumps info to dirverstation
  
  private boolean done = false;
- public boolean grabberIn = true;
- public boolean grabberClose = true;
+ public boolean grabberIn = false;
+ public boolean grabberClose = false;
 
  @Override
  public void robotInit() {

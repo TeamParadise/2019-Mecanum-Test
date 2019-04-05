@@ -71,10 +71,10 @@ public class RobotMap {
 
     //Pneumatics
     public static final int kPcm0 = 0;
-    public static final int kGrabExtendChannel = 5;
-    public static final int kGrabRetractChannel = 4;
-    public static final int kGrabOpen = 2;
-    public static final int kGrabClose = 3;
+    public static final int kGrabExtendChannel = 4;
+    public static final int kGrabRetractChannel = 5;
+    public static final int kGrabOpen = 3;
+    public static final int kGrabClose = 2;
     public static final int kBallExtend = 0;
     public static final int kBallRetract = 1;
     public static final int kBrakeOpen = 6;
