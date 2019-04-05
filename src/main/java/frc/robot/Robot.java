@@ -25,6 +25,7 @@ import frc.robot.CommandGroups.BallGot;
 // import frc.robot.CommandGroups.DiscReleaseExtend;
 // import frc.robot.CommandGroups.MoveLift;
 import frc.robot.CommandGroups.ConfigureRobot;
+import frc.robot.CommandGroups.BallShoot;
 import frc.robot.SubSystems.AnalogPressureSensor;
 import frc.robot.SubSystems.BallMotor;
 import frc.robot.SubSystems.DriveTrain;
@@ -33,7 +34,6 @@ import frc.robot.SubSystems.NAVxSubSystem;
 import frc.robot.SubSystems.PneumaticDouble;
 import frc.robot.SubSystems.Sonar;
 import frc.robot.commands.AutoPilotSonarRobot;
-import frc.robot.commands.BallShoot; //will we use it again?
 import frc.robot.commands.BrakeClose;
 import frc.robot.commands.BrakeOpen;
 import frc.robot.commands.DiscGrabberDownwards;
@@ -175,7 +175,7 @@ public void runRobot()
     else if (reportLoops == 10) reportLoops = 0; //start the reporting process over
 
     if(m_stick.getRawButtonPressed(RobotMap.kBallShoot) || m_stick1.getRawButtonPressed(RobotMap.kBallShoot)) new BallShoot().start();
-    else if (m_stick.getRawButtonReleased(RobotMap.kBallShoot) || m_stick1.getRawButtonReleased(RobotMap.kBallShoot)) new BallGot().start();
+    else if (m_stick.getRawButtonReleased(RobotMap.kBallpickup) || m_stick1.getRawButtonReleased(RobotMap.kBallpickup)) new BallGot().start();
     else if (m_stick.getRawButtonPressed(RobotMap.kBallpickup) || m_stick1.getRawButtonPressed(RobotMap.kBallpickup) ) new BallGet().start();
     // else if (m_stick.getRawButtonReleased(RobotMap.kDiscPlace) || m_stick1.getRawButtonReleased(RobotMap.kDiscPlace)) new DiscRelease().start();
     // else if (m_stick.getRawButtonReleased(RobotMap.kDiscGet) || m_stick1.getRawButtonReleased(RobotMap.kDiscGet)) new DiscPickUp().start();

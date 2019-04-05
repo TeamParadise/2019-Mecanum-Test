@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class BallShoot extends Command {
-  public BallShoot() {
+public class BallMotorShoot extends Command {
+  public BallMotorShoot() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.ballMotor);
   }
@@ -20,7 +20,7 @@ public class BallShoot extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.ballMotor.set(1.0);
+    Robot.ballMotor.set(0.75);
   }
 
   // Called repeatedly when this Command is scheduled to run

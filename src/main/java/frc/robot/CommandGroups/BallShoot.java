@@ -9,17 +9,18 @@ package frc.robot.CommandGroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
-import frc.robot.RobotMap;
+import frc.robot.commands.BallMotorShoot;
 import frc.robot.commands.BallMotorStop;
 import frc.robot.commands.BallPickRetract;
 
-public class BallGot extends CommandGroup {
+public class BallShoot extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public BallGot() {
-   //addSequential(new BallPickRetract());
-   //addSequential(new WaitCommand(0.6));
+  public BallShoot() {
+   addSequential(new BallMotorShoot());
+   addSequential(new WaitCommand(0.6));
+   addSequential(new BallPickRetract());
    addSequential(new BallMotorStop());
    //addSequential(new MoveLift(RobotMap.kLiftBallLevel1), 2);
   }
