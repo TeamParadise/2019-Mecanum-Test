@@ -47,7 +47,7 @@ public class AnalogPressureSensor extends Subsystem {
   public double getPressure()
 	{
     //Not going to bother with normalization, because a ballpark is good enough
-    return 250 * (2.9/(pressureSensor.getVoltage()/0.58)) - 25;
+    return 120*pressureSensor.getVoltage()/2.8; //2.8 Volts at 120psi, 0 @0 //250 * (2.9/(pressureSensor.getVoltage()/0.58)) - 25;
 		//return 191.4 * (pressureSensor.getVoltage() - 0.717773364) + 85;
     //return 50 * mPressureSensor.getVoltage() - 25;
 	}
