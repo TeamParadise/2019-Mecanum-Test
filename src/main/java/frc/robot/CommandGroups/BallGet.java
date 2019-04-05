@@ -8,7 +8,6 @@
 package frc.robot.CommandGroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.RobotMap;
 import frc.robot.commands.BallIntake;
 import frc.robot.commands.BallPickExtend;
 
@@ -18,7 +17,7 @@ public class BallGet extends CommandGroup {
    */
   public BallGet() {
    //addSequential(new MoveLift(RobotMap.kLiftBottom), 2);
-   addParallel(new BallPickExtend(), 2);
-   addSequential(new BallIntake());
+   addParallel(new BallIntake());
+   addSequential(new BallPickExtend(), 2);
   }
 }

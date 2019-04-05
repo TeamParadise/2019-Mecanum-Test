@@ -30,7 +30,7 @@ public class AnalogPressureSensor extends Subsystem {
   public void initDefaultCommand() 
   {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new ReportPressureSensor());
+    //setDefaultCommand(new ReportPressureSensor());
   }
 	/*
 	 * Equation:
@@ -54,6 +54,6 @@ public class AnalogPressureSensor extends Subsystem {
   public void report()
   {
     SmartDashboard.putNumber("Pressure Sensor", this.getPressure());
-    SmartDashboard.putNumber("Voltage", pressureSensor.getVoltage());
+    //SmartDashboard.putNumber("Voltage", pressureSensor.getVoltage());
   }
 }

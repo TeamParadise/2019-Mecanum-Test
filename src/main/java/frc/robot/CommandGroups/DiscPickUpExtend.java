@@ -8,8 +8,7 @@
 package frc.robot.CommandGroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
-import frc.robot.commands.DiscGrabberDownwards;
+import frc.robot.commands.DiscGrabberClose;
 import frc.robot.commands.DiscGrabberExtend;
 
 public class DiscPickUpExtend extends CommandGroup {
@@ -17,7 +16,7 @@ public class DiscPickUpExtend extends CommandGroup {
    * Add your docs here.
    */
   public DiscPickUpExtend() {
-    addSequential(new DiscGrabberDownwards(), 0.8);
+    addSequential(new DiscGrabberClose(), 0.8);
     //addSequential(new WaitCommand(0.3));
     addSequential(new DiscGrabberExtend(), 0.1);
   }

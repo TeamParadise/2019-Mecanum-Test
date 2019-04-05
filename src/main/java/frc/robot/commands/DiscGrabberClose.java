@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class DiscGrabberDownwards extends Command {
-  public DiscGrabberDownwards() {
+public class DiscGrabberClose extends Command {
+  public DiscGrabberClose() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.discLifter);
   }

@@ -19,13 +19,13 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CommandGroups.BallGet;
 import frc.robot.CommandGroups.BallGot;
+import frc.robot.CommandGroups.BallShoot;
 // import frc.robot.CommandGroups.DiscPickUp;
 // import frc.robot.CommandGroups.DiscPickUpExtend;
 // import frc.robot.CommandGroups.DiscRelease;
 // import frc.robot.CommandGroups.DiscReleaseExtend;
 // import frc.robot.CommandGroups.MoveLift;
 import frc.robot.CommandGroups.ConfigureRobot;
-import frc.robot.CommandGroups.BallShoot;
 import frc.robot.SubSystems.AnalogPressureSensor;
 import frc.robot.SubSystems.BallMotor;
 import frc.robot.SubSystems.DriveTrain;
@@ -34,13 +34,10 @@ import frc.robot.SubSystems.NAVxSubSystem;
 import frc.robot.SubSystems.PneumaticDouble;
 import frc.robot.SubSystems.Sonar;
 import frc.robot.commands.AutoPilotSonarRobot;
-import frc.robot.commands.BrakeClose;
-import frc.robot.commands.BrakeOpen;
-import frc.robot.commands.DiscGrabberDownwards;
+import frc.robot.commands.DiscGrabberClose;
 import frc.robot.commands.DiscGrabberExtend;
+import frc.robot.commands.DiscGrabberOpen;
 import frc.robot.commands.DiscGrabberRetract;
-import frc.robot.commands.DiscGrabberUpwards;
-import frc.robot.commands.LiftWithJoyStick;
 
 /**
  * This is a demo program showing how to use Mecanum control with the RobotDrive
@@ -48,20 +45,23 @@ import frc.robot.commands.LiftWithJoyStick;
  */
 public class Robot extends TimedRobot {
 
- //private int chooserCommand;
- //SendableChooser<Integer> chooser;
- 
- public static final DriveTrain driveTrain = new DriveTrain();
- public static final LiftSystem lift = new LiftSystem();
- public static final BallMotor ballMotor = new BallMotor();
- public static final NAVxSubSystem NAVx = new NAVxSubSystem();
- public static MecanumDrive m_robotDrive;
- public static Joystick m_stick = new Joystick(RobotMap.kJoystickChannel);
- public static Joystick m_stick1 = new Joystick(RobotMap.kJoystickChannel1);
- 
- public static PneumaticDouble discLifter = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kGrabOpen, RobotMap.kGrabClose);
- public static PneumaticDouble discGrabber = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kGrabExtendChannel, RobotMap.kGrabRetractChannel);
- public static PneumaticDouble ballGrabber = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kBallExtend, RobotMap.kBallRetract);
+  // private int chooserCommand;
+  // SendableChooser<Integer> chooser;
+
+  public static final DriveTrain driveTrain = new DriveTrain();
+  public static final LiftSystem lift = new LiftSystem();
+  public static final BallMotor ballMotor = new BallMotor();
+  public static final NAVxSubSystem NAVx = new NAVxSubSystem();
+  public static MecanumDrive m_robotDrive;
+  public static Joystick m_stick = new Joystick(RobotMap.kJoystickChannel);
+  public static Joystick m_stick1 = new Joystick(RobotMap.kJoystickChannel1);
+
+  public static PneumaticDouble discLifter = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kGrabOpen,
+      RobotMap.kGrabClose);
+  public static PneumaticDouble discGrabber = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kGrabExtendChannel,
+      RobotMap.kGrabRetractChannel);
+  public static PneumaticDouble ballGrabber = new PneumaticDouble(RobotMap.kPcm0, RobotMap.kBallExtend,
+      RobotMap.kBallRetract);
  public static PneumaticDouble brakeGrabber = new PneumaticDouble(RobotMap.kPcm0 , RobotMap.kBrakeOpen, RobotMap.kBrakeClose);
  
  public static AnalogPressureSensor pressureSensor = new AnalogPressureSensor();
@@ -72,7 +72,7 @@ public class Robot extends TimedRobot {
  
  private boolean done = false;
  public boolean grabberIn = true;
- public boolean grabberDown = true;
+ public boolean grabberClose = true;
 
  @Override
  public void robotInit() {
@@ -172,7 +172,8 @@ public void runRobot()
     else if (reportLoops == 2) lift.report(debugTrace);
     else if (reportLoops == 3) driveTrain.report(debugTrace);
     else if (reportLoops == 4) NAVx.report(debugTrace);
-    else if (reportLoops == 10) reportLoops = 0; //start the reporting process over
+    else if (reportLoops == 5) pressureSensor.report();
+    else if (reportLoops == 50) reportLoops = 0; //start the reporting process over
 
     if(m_stick.getRawButtonPressed(RobotMap.kBallShoot) || m_stick1.getRawButtonPressed(RobotMap.kBallShoot)) new BallShoot().start();
     else if (m_stick.getRawButtonReleased(RobotMap.kBallpickup) || m_stick1.getRawButtonReleased(RobotMap.kBallpickup)) new BallGot().start();
@@ -196,15 +197,15 @@ public void runRobot()
     }
     if (m_stick.getRawButtonPressed(RobotMap.kJGrabberOpenClose) || m_stick1.getRawButtonPressed(RobotMap.kJGrabberOpenClose))
     {
-      if (grabberDown)
+      if (grabberClose)
       {
-        new DiscGrabberUpwards().start();
-        grabberDown = false;
+        new DiscGrabberClose().start();
+        grabberClose = false;
       }
       else
       {
-        new DiscGrabberDownwards().start();
-        grabberDown = true;
+        new DiscGrabberOpen().start();
+        grabberClose = true;
       }
     }
     
