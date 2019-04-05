@@ -175,7 +175,7 @@ public void runRobot()
     else if (reportLoops == 10) reportLoops = 0; //start the reporting process over
 
     if(m_stick.getRawButtonPressed(RobotMap.kBallShoot) || m_stick1.getRawButtonPressed(RobotMap.kBallShoot)) new BallShoot().start();
-    else if (m_stick.getRawButtonReleased(RobotMap.kBallpickup) || m_stick1.getRawButtonReleased(RobotMap.kBallpickup)) new BallGot().start();
+    else if (m_stick.getRawButtonReleased(RobotMap.kBallShoot) || m_stick1.getRawButtonReleased(RobotMap.kBallShoot)) new BallGot().start();
     else if (m_stick.getRawButtonPressed(RobotMap.kBallpickup) || m_stick1.getRawButtonPressed(RobotMap.kBallpickup) ) new BallGet().start();
     // else if (m_stick.getRawButtonReleased(RobotMap.kDiscPlace) || m_stick1.getRawButtonReleased(RobotMap.kDiscPlace)) new DiscRelease().start();
     // else if (m_stick.getRawButtonReleased(RobotMap.kDiscGet) || m_stick1.getRawButtonReleased(RobotMap.kDiscGet)) new DiscPickUp().start();
