@@ -7,11 +7,11 @@
 
 package frc.robot.SubSystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import edu.wpi.first.wpilibj.AnalogInput;
 
 public class AnalogPressureSensor extends Subsystem {
   // Put methods for controlling this subsystem
@@ -24,6 +24,8 @@ public class AnalogPressureSensor extends Subsystem {
  * http://www.revrobotics.com/rev-11-1107/
  */
   AnalogInput pressureSensor = new AnalogInput(RobotMap.analogPressureSensorChannel);
+  private String lastReport = "none";
+
 
   @Override
   public void initDefaultCommand() 
@@ -50,9 +52,21 @@ public class AnalogPressureSensor extends Subsystem {
 		//return 191.4 * (pressureSensor.getVoltage() - 0.717773364) + 85;
     //return 50 * mPressureSensor.getVoltage() - 25;
 	}
-  public void report()
-  {
-    SmartDashboard.putNumber("Pressure Sensor", this.getPressure());
-    //SmartDashboard.putNumber("Voltage", pressureSensor.getVoltage());
+	public void report(boolean debugTrace)
+	{
+		if (debugTrace) DriverStation.reportWarning("Report Pressure", false);
+
+		StringBuilder _sb = new StringBuilder();
+ 		/* Prepare line to print */
+		 _sb.append("PSI: ");	// FrontLeft Motor
+		 _sb.append((int) (this.getPressure()));
+		 String output = _sb.toString();
+		 
+     if (!lastReport.equals(output))
+    	{	
+        SmartDashboard.putString("Pressure Sensor", output);
+      //SmartDashboard.putNumber("Voltage", pressureSensor.getVoltage());
+    lastReport = output;
   }
+}
 }

@@ -172,7 +172,7 @@ public void runRobot()
     else if (reportLoops == 2) lift.report(debugTrace);
     else if (reportLoops == 3) driveTrain.report(debugTrace);
     else if (reportLoops == 4) NAVx.report(debugTrace);
-    else if (reportLoops == 5) pressureSensor.report();
+    else if (reportLoops == 5) pressureSensor.report(debugTrace);
     else if (reportLoops == 50) reportLoops = 0; //start the reporting process over
 
     if(m_stick.getRawButtonPressed(RobotMap.kBallShoot) || m_stick1.getRawButtonPressed(RobotMap.kBallShoot)) new BallShoot().start();
