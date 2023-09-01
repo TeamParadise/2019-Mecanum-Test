@@ -77,24 +77,24 @@ public class Robot extends TimedRobot {
  @Override
  public void robotInit() {
    Shuffleboard.stopRecording();
-  //chooserCommand = -1;
-  //CameraServer.getInstance().addAxisCamera("Camera", "10.11.65.3");
-  //SmartDashboard.putData(new LiftToHeight(RobotMap.kLiftBottom));
-  //SmartDashboard.putData(new LiftToHeight(RobotMap.kLiftDiscLevel1));
-  // //SmartDashboard.putData(new LiftToHeight(RobotMap.kLiftBallLevel3));
-  // chooser = new SendableChooser<>();
-  // chooser.setName("Lift Position");
-  // chooser.addDefault("Default", -1);
-  // chooser.addObject("Lift Bottom", RobotMap.kLiftBottom);
-  // chooser.addObject("Disc Level 1", RobotMap.kLiftDiscLevel1);
-  // chooser.addObject("Ball Level 1", RobotMap.kLiftBallLevel1);
-  // chooser.addObject("Disc Level 2", RobotMap.kLiftDiscLevel2);
-  // chooser.addObject("Ball Level 2", RobotMap.kLiftBallLevel2);
-  // chooser.addObject("Disc Level 3", RobotMap.kLiftDiscLevel3);
-  // chooser.addObject("Ball Level 3", RobotMap.kLiftBallLevel3);
-  // SmartDashboard.putData(chooser);
+  chooserCommand = -1;
+  CameraServer.getInstance().addAxisCamera("Camera", "10.11.65.3");
+  SmartDashboard.putData(new LiftToHeight(RobotMap.kLiftBottom));
+  SmartDashboard.putData(new LiftToHeight(RobotMap.kLiftDiscLevel1));
+  SmartDashboard.putData(new LiftToHeight(RobotMap.kLiftBallLevel3));
+  chooser = new SendableChooser<>();
+  chooser.setName("Lift Position");
+  chooser.addDefault("Default", -1);
+  chooser.addObject("Lift Bottom", RobotMap.kLiftBottom);
+  chooser.addObject("Disc Level 1", RobotMap.kLiftDiscLevel1);
+  chooser.addObject("Ball Level 1", RobotMap.kLiftBallLevel1);
+  chooser.addObject("Disc Level 2", RobotMap.kLiftDiscLevel2);
+  chooser.addObject("Ball Level 2", RobotMap.kLiftBallLevel2);
+  chooser.addObject("Disc Level 3", RobotMap.kLiftDiscLevel3);
+  chooser.addObject("Ball Level 3", RobotMap.kLiftBallLevel3);
+  SmartDashboard.putData(chooser);
 
-  /*   try {
+  try {
     Field field1 = rightSonar.getClass().getDeclaredField("m_sensors");
 
     System.out.println(field1);
@@ -115,7 +115,7 @@ public class Robot extends TimedRobot {
   } catch(IllegalAccessException error) {
     System.out.println("illegal access exception");  
   }
-*/
+
 
    // Invert the left side motors.
    // You may need to change or remove this to match your robot.

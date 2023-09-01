@@ -11,7 +11,7 @@ package frc.robot;
  * Add your docs here.
  */
 public class RobotMap {
-    public static final int kJoystickChannel = 0;
+    public static final int kJoystickChannel = 100000;
     public static final int kJoystickChannel1 = 1;
     //Joystick buttons
     public static final int kBallShoot = 12; //not used, but refernce in BallShoot
